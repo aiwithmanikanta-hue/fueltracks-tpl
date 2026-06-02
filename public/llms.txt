@@ -1,0 +1,14 @@
+# Fuel Tracks Technologies
+
+> India's premium GPS vehicle tracking and real-time fuel monitoring platform for transport, logistics, school buses, and industrial fleets.
+
+Fuel Tracks Technologies Pvt Ltd builds IoT hardware (GPS devices, capacitive fuel sensors) and a cloud-based fleet management platform used by 500+ dealers and 10,000+ vehicles across India. Headquartered in Hyderabad, Telangana.
+
+## Pages
+
+- [Home](/): Overview of GPS tracking and fuel monitoring solutions.
+- [About](/about): Company story, mission, and India coverage.
+- [Products](/products): GPS tracking devices, capacitive fuel sensors, and fleet management software.
+- [Services](/services): End-to-end GPS, fuel monitoring, and RFID services.
+- [Dealers](/dealers): Dealer program with commissions, training, and protected territories.
+- [Contact](/contact): Get a demo, quote, or dealership inquiry.
