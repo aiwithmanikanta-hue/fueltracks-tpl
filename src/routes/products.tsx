@@ -25,7 +25,7 @@ export const Route = createFileRoute("/products")({
           "@graph": [
             { "@type": "Product", name: "FT-GPS-Pro GPS Tracking Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "GPS Tracking Device" },
             { "@type": "Product", name: "FT-CFS-1000 Capacitive Fuel Sensor", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.", category: "Fuel Level Sensor" },
-            { "@type": "Product", name: "FT-Cloud Suite Fleet Management Software", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Web + mobile dashboard with live map, fuel analytics, driver scoring, geo-fencing and CSV exports.", category: "Fleet Management Software" },
+            { "@type": "Product", name: "FT-Cloud Suite Smart HD CCTV Security Camera", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.", category: "Smart HD CCTV Security Camera" },
           ],
         }),
       },
@@ -74,9 +74,9 @@ const products = [
     slug: "fleet-software",
     icon: Monitor,
     image: fleetCameraImage.url,
-    name: "Fleet Management Software",
+    name: "Smart HD CCTV Security Camera",
     tag: "FT-Cloud Suite",
-    desc: "Web + mobile dashboard with live map, fuel analytics, driver scoring, geo-fencing and CSV exports.",
+    desc: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
     cta: "Request Demo",
     specs: [
       ["Live Tracking", "Sub-10-second refresh"],
