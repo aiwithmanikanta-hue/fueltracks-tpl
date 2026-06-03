@@ -208,7 +208,7 @@ export const products: Product[] = [
     slug: "fleet-software",
     sku: "FT-Cloud Suite",
     name: "Smart HD CCTV Security Camera",
-    tagline: "The dashboard your operations team will actually use.",
+    tagline: "Monitor your property 24/7 with crystal-clear HD video and night vision.",
     description:
       "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
     highlights: ["Live map", "Fuel analytics", "iOS + Android", "Role-based access"],
