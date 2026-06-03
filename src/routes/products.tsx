@@ -74,9 +74,9 @@ const products = [
     slug: "fleet-software",
     icon: Monitor,
     image: fleetCameraImage.url,
-    name: "Fleet Management Software",
+    name: "Smart HD CCTV Security Camera",
     tag: "FT-Cloud Suite",
-    desc: "Web + mobile dashboard with live map, fuel analytics, driver scoring, geo-fencing and CSV exports.",
+    desc: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
     cta: "Request Demo",
     specs: [
       ["Live Tracking", "Sub-10-second refresh"],
