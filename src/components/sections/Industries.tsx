@@ -34,7 +34,7 @@ export function Industries() {
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={(i % 4) * 0.06}>
-              <div className="group relative aspect-[4/5] rounded-2xl overflow-hidden glass cursor-pointer">
+              <div className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-white/40 border border-white/20 cursor-pointer">
                 <img
                   src={it.img}
                   alt={it.title}
