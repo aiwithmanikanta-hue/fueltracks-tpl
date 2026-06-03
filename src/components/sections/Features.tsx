@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Activity, Bell, Gauge, History, MapPin, Route } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import bgFuel from "@/assets/bg-fuel.png";
 import fuelTheftChart from "@/assets/fuel-theft-chart.png.asset.json";
 
 
@@ -30,7 +29,6 @@ const features = [
 export function Features() {
   return (
     <section id="features" className="relative py-24 overflow-hidden">
-      <img src={bgFuel} alt="" aria-hidden className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-30" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <SectionHeader

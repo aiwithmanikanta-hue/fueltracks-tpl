@@ -3,7 +3,6 @@ import { ArrowRight, BadgePercent, GraduationCap, LifeBuoy, Megaphone, Map as Ma
 import { GlassCard } from "../ui/GlassCard";
 import { AnimatedCounter } from "../ui/AnimatedCounter";
 import { Reveal } from "../ui/Reveal";
-import bgPump from "@/assets/bg-pump.png";
 
 
 const benefits = [
@@ -17,7 +16,6 @@ const benefits = [
 export function DealerProgram() {
   return (
     <section id="dealers" className="relative py-24 overflow-hidden">
-      <img src={bgPump} alt="" aria-hidden loading="lazy" className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-30" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[var(--gradient-glow)] opacity-40 blur-3xl" />

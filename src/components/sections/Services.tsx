@@ -2,7 +2,6 @@ import { MapPin, Fuel, ScanLine, Bus, BarChart3, UserCheck, Hexagon, Power, Shie
 import { GlassCard } from "../ui/GlassCard";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import bgPump from "@/assets/bg-pump.png";
 
 
 const services = [
@@ -21,7 +20,6 @@ const services = [
 export function Services() {
   return (
     <section id="services" className="relative py-24 overflow-hidden">
-      <img src={bgPump} alt="" aria-hidden loading="lazy" className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-30" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
       <div className="absolute inset-0 -z-10 bg-grid opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
       <div className="mx-auto max-w-7xl px-4 md:px-6">

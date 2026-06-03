@@ -3,7 +3,6 @@ import { Activity, AlertTriangle, Fuel, Truck } from "lucide-react";
 import { useRef, type MouseEvent } from "react";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import bgMap from "@/assets/bg-map.png";
 import dashboardMap from "@/assets/dashboard-map.mp4.asset.json";
 
 
@@ -24,7 +23,6 @@ export function DashboardShowcase() {
 
   return (
     <section className="relative py-24 overflow-hidden">
-      <img src={bgMap} alt="" aria-hidden className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-30" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <SectionHeader
