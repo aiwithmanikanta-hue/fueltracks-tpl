@@ -41,7 +41,7 @@ export function Industries() {
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl group-hover:ring-primary/40 transition-colors" />
                 <div className="absolute inset-x-0 bottom-0 p-5">
                   <h3 className="font-semibold text-lg">{it.title}</h3>
