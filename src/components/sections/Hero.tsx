@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
-import heroTruck from "@/assets/hero-bg.png";
+import heroTruck from "@/assets/hero-bg.webp";
 import dashboardVideo from "@/assets/dashboard-map.mp4.asset.json";
 
 export function Hero() {
