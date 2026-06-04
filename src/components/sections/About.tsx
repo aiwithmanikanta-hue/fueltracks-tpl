@@ -53,7 +53,7 @@ export function About() {
                         <span className="text-xs text-primary font-mono">{p.v}%</span>
                       </div>
                       <p className="text-sm text-muted-foreground mt-0.5">{p.d}</p>
-                      <div className="mt-2 h-1 rounded-full bg-white/5 overflow-hidden">
+                      <div className="mt-2 h-1 rounded-full bg-foreground/10 overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${p.v}%` }}

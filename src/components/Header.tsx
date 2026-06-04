@@ -24,7 +24,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "py-2 bg-white/85 backdrop-blur-md border-b border-border" : "py-4"}`}>
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center justify-between rounded-2xl px-4 md:px-6 py-3 transition-all bg-transparent">
           <Link to="/" aria-label="Fuel Tracks Technologies — Home" className="flex items-center group">
@@ -33,7 +33,7 @@ export function Header() {
               alt="Fuel Tracks Technologies"
               width={220}
               height={56}
-              className={`w-auto transition-all duration-300 ${scrolled ? "h-9" : "h-11"} drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] group-hover:scale-[1.02]`}
+              className={`w-auto transition-all duration-300 ${scrolled ? "h-9" : "h-11"} group-hover:scale-[1.02]`}
             />
           </Link>
 
@@ -59,12 +59,12 @@ export function Header() {
             <a href="#" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider glass hover:border-primary/40 transition-colors">
               <LogIn className="size-3.5 text-primary" /> LIVE LOGIN
             </a>
-            <a href="#" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider bg-[var(--gradient-primary)] text-primary-foreground shadow-glow bg-slate-700 hover:bg-slate-800 hover:shadow-glow hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out">
+            <a href="#" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider bg-primary text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:shadow-glow hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out">
               <Shield className="size-3.5" /> ADMIN LOGIN
             </a>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="lg:hidden size-10 grid place-items-center rounded-lg hover:bg-white/5" aria-label="Menu">
+          <button onClick={() => setOpen(!open)} className="lg:hidden size-10 grid place-items-center rounded-lg hover:bg-foreground/5" aria-label="Menu">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
@@ -76,7 +76,7 @@ export function Header() {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="px-4 py-3 text-sm font-semibold tracking-wide rounded-lg hover:bg-white/5"
+                className="px-4 py-3 text-sm font-semibold tracking-wide rounded-lg hover:bg-foreground/5"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 {l.label}
@@ -84,7 +84,7 @@ export function Header() {
             ))}
             <div className="grid grid-cols-2 gap-2 mt-2">
               <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl glass">LIVE LOGIN</a>
-              <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl bg-[var(--gradient-primary)] text-primary-foreground">ADMIN LOGIN</a>
+              <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl bg-primary text-primary-foreground">ADMIN LOGIN</a>
             </div>
           </div>
         )}
