@@ -61,10 +61,10 @@ export const products: Product[] = [
   {
     slug: "gps-tracking-device",
     sku: "FT-GPS-Pro",
-    name: "GPS Tracking Device",
+    name: "VLTD-AIS GPS Tracking Device",
     tagline: "Track smarter, drive safer and manage fleets better with real-time GPS, route history and instant security alerts.",
     description:
-      "The GPS Tracking Device is a reliable and intelligent vehicle tracking solution designed to provide real-time location monitoring, route tracking, security alerts, and complete fleet management capabilities. Whether you manage logistics, school buses, commercial vehicles, construction equipment, or personal vehicles, this device gives complete visibility and control through a powerful web and mobile platform.",
+      "The VLTD-AIS GPS Tracking Device is a reliable and intelligent vehicle tracking solution designed to provide real-time location monitoring, route tracking, security alerts, and complete fleet management capabilities. Whether you manage logistics, school buses, commercial vehicles, construction equipment, or personal vehicles, this device gives complete visibility and control through a powerful web and mobile platform.",
     highlights: ["Real-Time GPS", "4G / GSM", "Web + Mobile App", "24/7 Monitoring"],
     image: gpsImg1.url,
     images: [gpsImg1.url, gpsImg2.url],
@@ -90,7 +90,7 @@ export const products: Product[] = [
       { icon: Truck, title: "Fleet Management Support", desc: "Scale from a single vehicle to thousands on one platform." },
     ],
     specs: [
-      { label: "Device Type", value: "GPS Tracking Device", icon: Cpu },
+      { label: "Device Type", value: "VLTD-AIS GPS Tracking Device", icon: Cpu },
       { label: "Network", value: "4G / GSM", icon: Wifi },
       { label: "GPS Accuracy", value: "High Precision Tracking", icon: MapPin },
       { label: "Tracking", value: "Real-Time", icon: Activity },
@@ -131,7 +131,7 @@ export const products: Product[] = [
       { name: "Corporate Fleets", icon: Users },
     ],
     faqs: [
-      { q: "What is a GPS Tracking Device?", a: "A compact hardware unit installed in your vehicle that streams real-time location, speed and engine telemetry to a secure cloud platform you can access from anywhere." },
+      { q: "What is a VLTD-AIS GPS Tracking Device?", a: "A compact hardware unit installed in your vehicle that streams real-time location, speed and engine telemetry to a secure cloud platform you can access from anywhere." },
       { q: "How accurate is the tracking?", a: "High-precision multi-constellation GNSS delivers metre-level accuracy with a sub-10-second refresh rate on the live map." },
       { q: "Can I track multiple vehicles?", a: "Yes — the same dashboard scales from a single vehicle to thousands, with grouping, filters and role-based access." },
       { q: "Is mobile tracking available?", a: "Yes — free native iOS and Android apps are included for owners, dispatchers and drivers." },
