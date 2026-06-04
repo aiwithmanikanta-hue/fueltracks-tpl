@@ -134,6 +134,8 @@ export function Contact() {
                       </a>
                     </div>
                   </li>
+                  <li className="flex items-start gap-3">
+                    <div className="size-10 rounded-lg bg-primary/15 grid place-items-center text-primary shrink-0">
                       <Phone className="size-4" />
                     </div>
                     <div className="leading-tight">
