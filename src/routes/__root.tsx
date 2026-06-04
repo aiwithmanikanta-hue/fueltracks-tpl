@@ -92,6 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Real-time GPS vehicle tracking and fuel monitoring for transport, logistics, school buses and industrial fleets across India." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b50a3fd-9568-462b-938b-2564330c944b/id-preview-9812d14c--8c7ff6b9-7e1d-460c-a9df-2174870245c5.lovable.app-1779362937442.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b50a3fd-9568-462b-938b-2564330c944b/id-preview-9812d14c--8c7ff6b9-7e1d-460c-a9df-2174870245c5.lovable.app-1779362937442.png" },
+      { name: "google-site-verification", content: "dvDm50BEbD8cK_KmNawB9JRtId9AC_uuaptnW1GfwPU" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
