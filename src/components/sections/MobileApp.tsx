@@ -12,11 +12,14 @@ export function MobileApp() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           {/* Phones */}
-          <Reveal className="relative h-[560px] hidden md:block">
-            <div className="absolute inset-0 bg-[var(--gradient-glow)] blur-3xl opacity-40" />
-            <Phone className="absolute left-1/2 top-1/2 -translate-x-[110%] -translate-y-1/2 -rotate-6" delay={0.2} />
-            <Phone variant="alt" className="absolute left-1/2 top-1/2 -translate-x-[5%] -translate-y-[55%] rotate-6" delay={0.4} />
+          <Reveal className="relative hidden md:block">
+            <img
+              src={mobileScreens.url}
+              alt="Mobile app showing live tracking and fuel data records"
+              className="w-full h-auto object-contain"
+            />
           </Reveal>
+
 
           {/* Content */}
           <Reveal>
