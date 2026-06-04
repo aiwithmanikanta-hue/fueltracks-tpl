@@ -1,9 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Cpu, Droplet, Monitor, MessageCircle } from "lucide-react";
+import { Cpu, Droplet, Monitor, Download, ArrowRight, MessageCircle } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
-import { supabase } from "@/integrations/supabase/client";
 import fttplGpsDevice from "@/assets/fttpl-gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
@@ -35,8 +34,6 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const WHATSAPP_NUMBER = "917337433351";
-
 const products = [
   {
     slug: "gps-tracking-device",
@@ -46,20 +43,6 @@ const products = [
     tag: "FT-GPS-Pro",
     desc: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.",
     cta: "Enquire Now",
-    message: `Hello Fuel Tracks Team,
-
-I am interested in the VLTD-AIS GPS Tracking Device.
-
-Please share:
-• Product details
-• Pricing
-• Installation information
-• Demo availability
-
-My Name:
-My Company:
-
-Thank you.`,
     specs: [
       ["Network", "4G LTE + 2G fallback"],
       ["GNSS", "GPS + GLONASS, 2.5 m accuracy"],
@@ -76,17 +59,7 @@ Thank you.`,
     name: "Capacitive Fuel Sensor",
     tag: "FT-CFS-1000",
     desc: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.",
-    cta: "Enquire Now",
-    message: `Hello Fuel Tracks Team,
-
-I am interested in the Capacitive Fuel Sensor.
-
-Please share:
-• Product specifications
-• Pricing
-• Installation details
-
-Thank you.`,
+    cta: "Download Spec",
     specs: [
       ["Sensor Type", "Capacitive Fuel Level Sensor"],
       ["Accuracy", "±1–2% with idle-field condition"],
@@ -104,17 +77,7 @@ Thank you.`,
     name: "Smart HD CCTV Security Camera",
     tag: "FT-Cloud Suite",
     desc: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
-    cta: "Enquire Now",
-    message: `Hello Fuel Tracks Team,
-
-I am interested in the Smart HD CCTV Security Camera.
-
-Please share:
-• Software features
-• Pricing
-• Demo access
-
-Thank you.`,
+    cta: "Request Demo",
     specs: [
       ["Live Tracking", "Sub-10-second refresh"],
       ["Fuel Reports", "Refill, drain & mileage events"],
@@ -187,23 +150,21 @@ function ProductCard({ p }: { p: typeof products[number] }) {
 
 
 
-        <div className="mt-auto pt-5">
-          <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(p.message)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              void supabase.from("whatsapp_clicks").insert({
-                product_name: p.name,
-                product_slug: p.slug,
-                page_url: typeof window !== "undefined" ? window.location.href : null,
-                user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : null,
-              });
-            }}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all"
+        <div className="mt-auto pt-5 flex gap-2">
+          <Link
+            to="/products/$slug"
+            params={{ slug: p.slug }}
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform text-slate-700"
           >
-            <MessageCircle className="size-4" /> Enquire Now
-          </a>
+            View Details <ArrowRight className="size-4" />
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-primary/5 transition-colors"
+            aria-label={p.cta}
+          >
+            {p.cta === "Download Spec" ? <Download className="size-4" /> : <MessageCircle className="size-4" />}
+          </Link>
         </div>
       </div>
     </div>
