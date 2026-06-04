@@ -1,33 +1,44 @@
-## Goal
-Swap the site-wide primary background from `#D4EEED` to `#E5F1F1` and align card/border/shadow tokens to the new spec. Keep the existing mint+sky system; only soften the base tint.
+# Plan: WhatsApp Enquire Now button
 
-## Changes
+## Scope
+Product cards on `/products` only. Replace the two existing buttons (View Details + secondary icon) with a single **Enquire Now** WhatsApp CTA per card. Log each click to Supabase.
 
-### 1. `src/styles.css` — token update
-- `--background: #E5F1F1` (was `#D4EEED`)
-- `--accent: #E5F1F1` (keep accent aligned with new base)
-- `--secondary` / `--muted`: stay `#F8FCFC`
-- `--card: #FFFFFF`, `--card-foreground: #0F172A`
-- `--foreground: #0F172A`, `--muted-foreground: #64748B`
-- Add secondary text token usage: keep `#475569` available via existing `text-slate-*` utilities (no new token needed)
-- `--border: rgba(15,23,42,0.08)`
-- `--primary: #0EA5E9`, hover `#0284C7` (already set; verify CTA hover uses `#0284C7`)
-- Update `--gradient-hero` second radial stop from `rgba(212,238,237,…)` → `rgba(229,241,241,…)`
-- Soften `--shadow-elegant` to `0 8px 25px rgba(15,23,42,0.05)` to match card spec
-- Card utility shadow (`.shadow-card`) → `0 8px 25px rgba(15,23,42,0.05)`
+## WhatsApp config
+- Number: `+91 73374 33351` → `wa.me/917337433351`
+- Per-product pre-filled messages (URL-encoded):
+  - **VLTD-AIS GPS Tracking Device** — full message with product details / pricing / installation / demo + Name/Company placeholders
+  - **Capacitive Fuel Sensor** — specifications / pricing / installation
+  - **Smart HD CCTV Security Camera** — features / pricing / demo access
+- Add `message` field per product in the `products` array in `src/routes/products.tsx`.
 
-### 2. Component sweep (only where `#D4EEED` is hardcoded)
-Search and replace any literal `#D4EEED` references in components with `var(--background)` / `bg-background`. Based on prior edits the palette is token-driven, so this should be a no-op or minimal.
+## Button
+Replace the `<Link to="/products/$slug">` + secondary `<Link to="/contact">` block in `ProductCard` (lines 153–168) with one full-width `<a>`:
 
-### 3. Card radius
-Confirm Tailwind `rounded-2xl` (16px) is used on primary cards (`GlassCard`, product cards). No structural changes — only adjust if a card currently uses `rounded-xl` in a hero/product context.
+- `href`: `https://wa.me/917337433351?text=<encoded message>`
+- `target="_blank"`, `rel="noopener noreferrer"`
+- Style: bg `#25D366`, white text, hover `#1ebe57`, rounded-xl, MessageCircle icon + "Enquire Now"
+- onClick → fire tracking insert (fire-and-forget, don't block navigation)
+
+## Tracking (Supabase)
+New table via migration:
+
+```
+public.whatsapp_clicks
+  - id uuid pk
+  - product_name text not null
+  - product_slug text
+  - page_url text
+  - user_agent text
+  - created_at timestamptz default now()
+```
+- GRANT INSERT to anon, authenticated; GRANT ALL to service_role; GRANT SELECT to authenticated (admin via RLS).
+- RLS: allow anon/authenticated INSERT (with length checks); SELECT restricted to `has_role(auth.uid(),'admin')`.
+
+Client logs click via `supabase.from('whatsapp_clicks').insert({...})` directly before opening WhatsApp (link still navigates via `target=_blank`).
+
+## Files
+- `supabase/migration` — create table + policies
+- `src/routes/products.tsx` — add `message` per product, rewrite button row in `ProductCard`, drop unused `Download`/`ArrowRight`/`Link` imports as needed, import `supabase`.
 
 ## Out of scope
-- No layout, copy, routing, or component-structure changes
-- No dark-mode token changes
-- No new pages or sections
-- No logic/business changes
-
-## Files touched
-- `src/styles.css` (primary)
-- Any component file containing a literal `#D4EEED` (sweep only)
+Product detail page, contact page, other CTAs elsewhere on the site.
