@@ -3,7 +3,6 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 import heroTruck from "@/assets/hero-bg.png";
-import videoTracks from "@/assets/video-tracks.mp4";
 
 export function Hero() {
   return (
