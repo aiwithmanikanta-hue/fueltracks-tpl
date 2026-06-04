@@ -187,21 +187,23 @@ function ProductCard({ p }: { p: typeof products[number] }) {
 
 
 
-        <div className="mt-auto pt-5 flex gap-2">
-          <Link
-            to="/products/$slug"
-            params={{ slug: p.slug }}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform text-slate-700"
+        <div className="mt-auto pt-5">
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(p.message)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              void supabase.from("whatsapp_clicks").insert({
+                product_name: p.name,
+                product_slug: p.slug,
+                page_url: typeof window !== "undefined" ? window.location.href : null,
+                user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : null,
+              });
+            }}
+            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all"
           >
-            View Details <ArrowRight className="size-4" />
-          </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-primary/5 transition-colors"
-            aria-label={p.cta}
-          >
-            {p.cta === "Download Spec" ? <Download className="size-4" /> : <MessageCircle className="size-4" />}
-          </Link>
+            <MessageCircle className="size-4" /> Enquire Now
+          </a>
         </div>
       </div>
     </div>
