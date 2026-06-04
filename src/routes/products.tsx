@@ -1,8 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Cpu, Droplet, Monitor, Download, ArrowRight, MessageCircle } from "lucide-react";
+import { Cpu, Droplet, Monitor, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/fttpl-gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
@@ -151,20 +153,23 @@ function ProductCard({ p }: { p: typeof products[number] }) {
 
 
         <div className="mt-auto pt-5 flex gap-2">
-          <Link
-            to="/products/$slug"
-            params={{ slug: p.slug }}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform text-slate-700"
+          <a
+            href={buildProductEnquiryUrl(p.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
           >
-            View Details <ArrowRight className="size-4" />
-          </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-primary/5 transition-colors"
-            aria-label={p.cta}
+            <WhatsAppIcon className="size-4" /> Enquire Now <ArrowRight className="size-4" />
+          </a>
+          <a
+            href={buildProductEnquiryUrl(p.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-[#25D366] hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-colors"
+            aria-label={`WhatsApp enquiry for ${p.name}`}
           >
-            {p.cta === "Download Spec" ? <Download className="size-4" /> : <MessageCircle className="size-4" />}
-          </Link>
+            <WhatsAppIcon className="size-5" />
+          </a>
         </div>
       </div>
     </div>
