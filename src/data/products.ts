@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import sensorImg from "@/assets/products/ft-cfs-1000.webp";
 import softwareImg from "@/assets/products/ft-cloud-suite.webp";
-import gpsImg1 from "@/assets/gps-tracker-main.jpg.asset.json";
-import gpsImg2 from "@/assets/gps-device-2.jpg.asset.json";
+const gpsImg1 = { url: "/images/gps-tracker-main.jpg" };
+const gpsImg2 = { url: "/images/gps-device-2.jpg" };
 
 
 export type Feature = { icon: LucideIcon; title: string; desc: string };

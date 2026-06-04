@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
-import fuelTracksLogo from "@/assets/fuel-tracks-logo.png.asset.json";
+const fuelTracksLogo = { url: "/icons/fuel-tracks-logo.png" };
 
 export function Footer() {
   return (
