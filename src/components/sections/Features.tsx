@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Activity, Bell, Gauge, History, MapPin, Route } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import fuelTheftChart from "@/assets/fuel-theft-chart.png.asset.json";
+const fuelTheftChart = { url: "/images/fuel-theft-chart.png" };
 
 
 const features = [

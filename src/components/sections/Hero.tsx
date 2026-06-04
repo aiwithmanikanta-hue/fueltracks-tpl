@@ -3,7 +3,7 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 import heroTruck from "@/assets/hero-bg.webp";
-import dashboardVideo from "@/assets/dashboard-map.mp4.asset.json";
+const dashboardVideo = { url: "/videos/dashboard-map.mp4" };
 
 export function Hero() {
   return (

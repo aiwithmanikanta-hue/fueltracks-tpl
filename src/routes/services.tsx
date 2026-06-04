@@ -8,10 +8,10 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { Services } from "@/components/sections/Services";
 import { DashboardShowcase } from "@/components/sections/DashboardShowcase";
 import { Industries } from "@/components/sections/Industries";
-import mapPinIcon from "@/assets/map-pin.png.asset.json";
-import fuelSensorIcon from "@/assets/fuel-sensor-icon.png.asset.json";
-import rfidIcon from "@/assets/rfid-icon-v2.png.asset.json";
-import fleetDeploymentImg from "@/assets/fleet-deployment.png.asset.json";
+const mapPinIcon = { url: "/icons/map-pin.png" };
+const fuelSensorIcon = { url: "/icons/fuel-sensor-icon.png" };
+const rfidIcon = { url: "/icons/rfid-icon-v2.png" };
+const fleetDeploymentImg = { url: "/images/fleet-deployment.png" };
 
 export const Route = createFileRoute("/services")({
   head: () => ({

@@ -5,9 +5,9 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
-import fttplGpsDevice from "@/assets/fttpl-gps-device.png.asset.json";
-import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
-import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
+const fttplGpsDevice = { url: "/images/fttpl-gps-device.png" };
+const fuelSensorImage = { url: "/images/fuel-sensor.png" };
+const fleetCameraImage = { url: "/images/fleet-camera.png" };
 
 export const Route = createFileRoute("/products")({
   head: () => ({

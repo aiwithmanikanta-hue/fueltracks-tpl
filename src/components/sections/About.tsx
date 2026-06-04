@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import coverageMap from "@/assets/coverage-map.png.asset.json";
+const coverageMap = { url: "/images/coverage-map-v2.jpg" };
 
 
 const points = [

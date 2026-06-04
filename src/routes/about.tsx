@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import indiaMap from "@/assets/fleet-coverage-map-v2.png.asset.json";
+const indiaMap = { url: "/images/fleet-coverage-map-v2.png" };
 import { Satellite, Droplet, Shield, Headphones, Truck, Bus, Building2, Factory, Snowflake, Stethoscope, ShieldCheck, Tractor } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";

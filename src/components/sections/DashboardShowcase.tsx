@@ -3,7 +3,7 @@ import { Activity, AlertTriangle, Fuel, Truck } from "lucide-react";
 import { useRef, type MouseEvent } from "react";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import dashboardVideo from "@/assets/dashboard-preview.mp4.asset.json";
+const dashboardVideo = { url: "/videos/dashboard-preview.mp4" };
 
 
 
