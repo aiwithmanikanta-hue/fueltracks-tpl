@@ -23,7 +23,7 @@ export const Route = createFileRoute("/products")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
-            { "@type": "Product", name: "FT-GPS-Pro GPS Tracking Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "GPS Tracking Device" },
+            { "@type": "Product", name: "VLTD-AIS GPS Tracking Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "VLTD-AIS GPS Tracking Device" },
             { "@type": "Product", name: "FT-CFS-1000 Capacitive Fuel Sensor", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.", category: "Fuel Level Sensor" },
             { "@type": "Product", name: "FT-Cloud Suite Smart HD CCTV Security Camera", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.", category: "Smart HD CCTV Security Camera" },
           ],
