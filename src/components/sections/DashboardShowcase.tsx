@@ -61,14 +61,12 @@ export function DashboardShowcase() {
               <div className="mt-4 grid lg:grid-cols-[1fr_280px] gap-4">
                 {/* Map */}
                 <div className="relative h-[380px] md:h-[460px] rounded-2xl overflow-hidden bg-white border border-white/5">
-                  <video
-                    src={dashboardMap.url}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+                    <div className="text-center">
+                      <MapPin className="size-8 text-primary/40 mx-auto mb-2" />
+                      <span className="text-sm text-muted-foreground font-medium">Live Map Preview</span>
+                    </div>
+                  </div>
 
                   {/* floating cards on map */}
                   <div className="absolute top-4 left-4 glass rounded-xl px-3 py-2 text-xs">
