@@ -69,7 +69,7 @@ export function Contact() {
                     name="subject"
                     required
                     defaultValue=""
-                    className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
                   >
                     <option value="" disabled>Select a topic…</option>
                     <option value="gps">GPS Device</option>
@@ -85,7 +85,7 @@ export function Contact() {
                     name="message"
                     required
                     rows={4}
-                    className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all resize-none placeholder:text-foreground/50"
+                    className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all resize-none placeholder:text-foreground/50"
                     placeholder="Tell us about your fleet..."
                   />
                 </div>

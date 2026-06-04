@@ -85,7 +85,7 @@ function ServicesPage() {
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 0.08}>
                 <GlassCard glow className="h-full text-center group">
-                  <div className="size-14 mx-auto rounded-2xl bg-[var(--gradient-primary)] grid place-items-center text-primary-foreground shadow-glow group-hover:scale-110 transition-transform overflow-hidden bg-slate-700">
+                  <div className="size-14 mx-auto rounded-2xl bg-primary grid place-items-center text-primary-foreground shadow-glow group-hover:scale-110 transition-transform overflow-hidden">
                     {i === 0 ? (
                       <img src={mapPinIcon.url} alt="GPS location pin" className="size-8 object-contain" />
                     ) : i === 1 ? (
@@ -128,7 +128,7 @@ function ServicesPage() {
               </ul>
             </GlassCard>
             <GlassCard className="h-full overflow-hidden p-0">
-              <div className="aspect-video relative bg-[oklch(0.18_0.05_250)]">
+              <div className="aspect-video relative bg-secondary">
                 <img
                   src={fleetDeploymentImg.url}
                   alt="Diverse fleet — trucks, buses, ambulances and construction equipment connected via GPS tracking across India"
