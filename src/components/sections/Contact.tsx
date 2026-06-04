@@ -187,7 +187,7 @@ function Field({ label, type, name, id }: { label: string; type: string; name: s
         type={type}
         name={name}
         required
-        className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
+        className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
       />
     </div>
   );
