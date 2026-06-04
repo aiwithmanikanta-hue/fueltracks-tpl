@@ -159,7 +159,7 @@ function ServicesPage() {
                   key={t.id}
                   onClick={() => setTab(t.id)}
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
-                    tab === t.id ? "bg-[var(--gradient-primary)] text-primary-foreground shadow-glow" : "glass hover:border-primary/40"
+                    tab === t.id ? "bg-[var(--gradient-primary)] text-primary-foreground shadow-glow bg-slate-600" : "glass hover:border-primary/40"
                   }`}
                 >
                   <t.icon className="size-4" /> {t.label}
