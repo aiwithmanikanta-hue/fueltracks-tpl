@@ -44,8 +44,8 @@ export function Industries() {
                 
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl group-hover:ring-primary/40 transition-colors" />
                 <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="font-semibold text-lg">{it.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{it.desc}</p>
+                  <h3 className="font-semibold text-lg text-slate-100">{it.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5 text-slate-500">{it.desc}</p>
                   <div className="mt-3 h-0.5 w-8 bg-primary rounded-full transition-all duration-500 group-hover:w-16" />
                 </div>
               </div>
