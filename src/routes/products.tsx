@@ -35,6 +35,8 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
+const WHATSAPP_NUMBER = "917337433351";
+
 const products = [
   {
     slug: "gps-tracking-device",
@@ -44,6 +46,20 @@ const products = [
     tag: "FT-GPS-Pro",
     desc: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.",
     cta: "Enquire Now",
+    message: `Hello Fuel Tracks Team,
+
+I am interested in the VLTD-AIS GPS Tracking Device.
+
+Please share:
+• Product details
+• Pricing
+• Installation information
+• Demo availability
+
+My Name:
+My Company:
+
+Thank you.`,
     specs: [
       ["Network", "4G LTE + 2G fallback"],
       ["GNSS", "GPS + GLONASS, 2.5 m accuracy"],
@@ -60,7 +76,17 @@ const products = [
     name: "Capacitive Fuel Sensor",
     tag: "FT-CFS-1000",
     desc: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.",
-    cta: "Download Spec",
+    cta: "Enquire Now",
+    message: `Hello Fuel Tracks Team,
+
+I am interested in the Capacitive Fuel Sensor.
+
+Please share:
+• Product specifications
+• Pricing
+• Installation details
+
+Thank you.`,
     specs: [
       ["Sensor Type", "Capacitive Fuel Level Sensor"],
       ["Accuracy", "±1–2% with idle-field condition"],
@@ -78,7 +104,17 @@ const products = [
     name: "Smart HD CCTV Security Camera",
     tag: "FT-Cloud Suite",
     desc: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
-    cta: "Request Demo",
+    cta: "Enquire Now",
+    message: `Hello Fuel Tracks Team,
+
+I am interested in the Smart HD CCTV Security Camera.
+
+Please share:
+• Software features
+• Pricing
+• Demo access
+
+Thank you.`,
     specs: [
       ["Live Tracking", "Sub-10-second refresh"],
       ["Fuel Reports", "Refill, drain & mileage events"],
