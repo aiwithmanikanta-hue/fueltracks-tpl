@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "aa285b53-9e5e-4f0c-90ea-46e854db7d1f",
-  "project_id": "da761bbe-d6f0-4527-a8eb-f9994dff132c",
-  "url": "/__l5e/assets-v1/aa285b53-9e5e-4f0c-90ea-46e854db7d1f/fleet-coverage-map-v2.png",
-  "r2_key": "a/v1/da761bbe-d6f0-4527-a8eb-f9994dff132c/aa285b53-9e5e-4f0c-90ea-46e854db7d1f/fleet-coverage-map-v2.png",
-  "original_filename": "fleet-coverage-map-v2.png",
-  "size": 2287924,
   "content_type": "image/png",
-  "created_at": "2026-06-03T09:28:26Z"
+  "created_at": "2026-06-03T09:28:26Z",
+  "original_filename": "fleet-coverage-map-v2.png",
+  "project_id": "87cb956a-02b4-448a-a98f-c3617af48738",
+  "r2_key": "a/v1/87cb956a-02b4-448a-a98f-c3617af48738/aa285b53-9e5e-4f0c-90ea-46e854db7d1f/fleet-coverage-map-v2.png",
+  "size": 2287924,
+  "url": "/__l5e/assets-v1/aa285b53-9e5e-4f0c-90ea-46e854db7d1f/fleet-coverage-map-v2.png",
+  "version": 1
 }
