@@ -1,33 +1,39 @@
-## Goal
+## Plan: Replace "View Details" with WhatsApp Product Enquiry
 
-Replace the 8 industry images in the "Industries We Serve" section (`src/components/sections/Industries.tsx`) with newly generated, premium, India-authentic visuals at 1055×1055.
+### 1. Add a reusable WhatsApp icon component
+Create `src/components/icons/WhatsAppIcon.tsx` as a small inline SVG matching the brand green (#25D366). Reuse this in both the product cards and replace the raw SVG in `Footer.tsx` to keep things DRY.
 
-## Images to generate (1055×1055, premium quality, photorealistic India context)
+### 2. Build a WhatsApp enquiry link helper
+Add a small pure helper (e.g. in `src/lib/whatsapp.ts`) that accepts a product name and returns a `https://wa.me/917337433351?text=...` URL with an encoded enquiry message:
 
-1. **Logistics & Transport** — Indian Tata/Ashok Leyland cargo truck on a Telangana highway, subtle GPS/logistics hub backdrop.
-2. **School Buses** — Yellow Indian school bus outside a Hyderabad school campus, safety/tracking feel.
-3. **Mining** — Indian mining dump trucks (BEML/Tata) in an open-pit mine, monitoring overlay subtle.
-4. **Construction** — Excavators, tippers, JCBs at a large Indian infrastructure site.
-5. **Car Rentals** — Fleet of Indian rental sedans/SUVs (Swift Dzire, Innova) at a professional business lot.
-6. **Fuel Tankers** — Indian fuel tanker on a national highway with fuel-monitoring visualization.
-7. **Delivery Services** — Indian delivery vans/mini-cargo (Tata Ace, Mahindra) in busy Hyderabad street.
-8. **Corporate Fleets** — Corporate Innovas/Toyotas outside a modern Indian office campus.
+```
+Hello Fuel Tracks Team,
 
-Style guide applied to every prompt: photorealistic, cinematic corporate, natural daylight, consistent warm Indian palette, shallow DOF, no text, no logos, enterprise-grade, NOT American/European vehicles.
+I am interested in the {Product Name}.
 
-## Implementation
+Could you please provide:
+• Product Details
+• Pricing Information
+• Installation Process
+• Demo Availability
 
-1. Generate 8 images via `imagegen--generate_image` (premium tier, 1056×1056 — must be multiple of 32, closest to 1055), saved as `src/assets/ind-{slug}.jpg` (overwriting the existing 8 industry JPGs to keep imports unchanged).
-2. Verify visually by viewing each generated file; regenerate any that include foreign vehicles or look AI-artificial.
-3. No code changes needed in `Industries.tsx` since filenames are reused — the existing imports automatically pick up new images.
+Please contact me with more information.
 
-## Technical notes
+Thank you.
+```
 
-- Existing files: `src/assets/ind-logistics.jpg`, `ind-school.jpg`, `ind-mining.jpg`, `ind-construction.jpg`, `ind-rental.jpg`, `ind-tanker.jpg`, `ind-delivery.jpg`, `ind-corporate.jpg`.
-- Use `model: "standard"` (premium is reserved for typography-heavy images; standard delivers photorealistic hero-quality at lower cost). Confirm if you'd prefer `premium`.
-- Dimensions: 1056×1056 (imagegen requires multiples of 32; 1055 isn't valid). The component renders them in a 4:5 aspect container with `object-cover`, so square source works fine.
+The message is dynamically generated from the product name — no hardcoding.
 
-## Confirm before I build
+### 3. Update `src/routes/products.tsx` ProductCard
+- Replace the primary "View Details" button with an "Enquire on WhatsApp" CTA.
+- Style it with the WhatsApp green (`#25D366`) background, white text, and the WhatsApp icon.
+- Both the text and the icon open the same `wa.me` link.
+- The secondary action button ("Download Spec" / contact icon) stays as-is.
 
-- OK to overwrite the 8 existing `ind-*.jpg` files?
-- Use `standard` quality (faster/cheaper, photoreal) or `premium` (highest fidelity, slower)?
+### 4. (Optional cleanup) Update `Footer.tsx`
+Swap its inline WhatsApp SVG for the new shared component to keep the icon consistent.
+
+### Out of scope
+- No backend changes.
+- No new routes or pages.
+- The product detail page (`/products/$slug`) remains accessible via direct URL but is no longer linked from the card grid.
