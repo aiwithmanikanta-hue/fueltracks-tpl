@@ -83,7 +83,7 @@ export function Header() {
               </Link>
             ))}
             <div className="grid grid-cols-2 gap-2 mt-2">
-              <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl glass">LIVE LOGIN</a>
+              <a href="http://fueltracks.online/gps/public/login" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl glass">LIVE LOGIN</a>
               <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl bg-primary text-primary-foreground">ADMIN LOGIN</a>
             </div>
           </div>
