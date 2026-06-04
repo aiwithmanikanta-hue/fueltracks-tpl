@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
 import { Apple, Bell, Fuel, MapPin } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
+import mobileScreens from "@/assets/mobile-app-screens.jpeg.asset.json";
+
 
 
 export function MobileApp() {
