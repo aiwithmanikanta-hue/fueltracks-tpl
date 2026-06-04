@@ -142,9 +142,6 @@ function ProductCard({ p }: { p: typeof products[number] }) {
             </motion.div>
           )}
         </div>
-        <div className="absolute top-3 left-3 text-[10px] font-mono bg-white/90 backdrop-blur rounded-full px-2.5 py-1 tracking-wider border border-navy/10 shadow-sm">
-          {p.tag}
-        </div>
       </div>
 
       <div className="px-6 pb-6 flex flex-col flex-1">
