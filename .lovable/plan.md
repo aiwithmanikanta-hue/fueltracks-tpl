@@ -1,28 +1,33 @@
-# Update Google Maps location sitewide
+## Goal
 
-Resolved short link `https://maps.app.goo.gl/oSUTUMM2ynC87BKTA` →
-Place: **Fuel Tracks**, coords **17.3454351, 78.5239719**.
+Replace the 8 industry images in the "Industries We Serve" section (`src/components/sections/Industries.tsx`) with newly generated, premium, India-authentic visuals at 1055×1055.
 
-Single shared link constant will be used everywhere for consistency:
-`https://maps.app.goo.gl/oSUTUMM2ynC87BKTA` (mobile devices auto-open the Google Maps app via this short link; desktop opens in browser).
+## Images to generate (1055×1055, premium quality, photorealistic India context)
 
-## Changes
+1. **Logistics & Transport** — Indian Tata/Ashok Leyland cargo truck on a Telangana highway, subtle GPS/logistics hub backdrop.
+2. **School Buses** — Yellow Indian school bus outside a Hyderabad school campus, safety/tracking feel.
+3. **Mining** — Indian mining dump trucks (BEML/Tata) in an open-pit mine, monitoring overlay subtle.
+4. **Construction** — Excavators, tippers, JCBs at a large Indian infrastructure site.
+5. **Car Rentals** — Fleet of Indian rental sedans/SUVs (Swift Dzire, Innova) at a professional business lot.
+6. **Fuel Tankers** — Indian fuel tanker on a national highway with fuel-monitoring visualization.
+7. **Delivery Services** — Indian delivery vans/mini-cargo (Tata Ace, Mahindra) in busy Hyderabad street.
+8. **Corporate Fleets** — Corporate Innovas/Toyotas outside a modern Indian office campus.
 
-### 1. `src/components/sections/Contact.tsx`
-- Replace the iframe `src` with a new embed centered on the new coordinates (zoom ~17, marker on the exact spot), update `title` to "Fuel Tracks Technologies office location".
-- Update the `<Info icon={MapPin} label="Office" value="..." />` value to a more specific address line (keep "Hyderabad, Telangana, India" suffix) and wrap it in an `<a>` to the short link (new tab, `rel="noopener noreferrer"`, hover styling consistent with other links).
-- Add a "Get Directions" button under the map (or convert the existing map card into a clickable surface) linking to the short link.
+Style guide applied to every prompt: photorealistic, cinematic corporate, natural daylight, consistent warm Indian palette, shallow DOF, no text, no logos, enterprise-grade, NOT American/European vehicles.
 
-### 2. `src/components/Footer.tsx`
-- Wrap the address line (`Fuel Tracks Technologies, Hyderabad, India`) in an `<a href="https://maps.app.goo.gl/oSUTUMM2ynC87BKTA" target="_blank" rel="noopener noreferrer">` with hover:text-primary.
+## Implementation
 
-### 3. `src/routes/__root.tsx`
-- No coordinate change needed in JSON-LD beyond what already lists Hyderabad/Telangana/IN. (Skip unless we want to add geo lat/long — will add `geo` block with the new lat/long for SEO accuracy.)
+1. Generate 8 images via `imagegen--generate_image` (premium tier, 1056×1056 — must be multiple of 32, closest to 1055), saved as `src/assets/ind-{slug}.jpg` (overwriting the existing 8 industry JPGs to keep imports unchanged).
+2. Verify visually by viewing each generated file; regenerate any that include foreign vehicles or look AI-artificial.
+3. No code changes needed in `Industries.tsx` since filenames are reused — the existing imports automatically pick up new images.
 
 ## Technical notes
-- New embed URL pattern:
-  `https://www.google.com/maps?q=17.3454351,78.5239719&hl=en&z=17&output=embed`
-  (lightweight, no API key, marker pinned on the coordinate, works on all devices, responsive via existing 100%/100% sizing).
-- Mobile behavior: `maps.app.goo.gl` short links are handled by the Google Maps app on Android/iOS automatically; no extra logic required.
-- Keep all existing styling (glass-strong card, rounded-3xl, h-[260px], filter inversion) so the visual design stays identical.
-- No business logic, routing, or data-layer changes.
+
+- Existing files: `src/assets/ind-logistics.jpg`, `ind-school.jpg`, `ind-mining.jpg`, `ind-construction.jpg`, `ind-rental.jpg`, `ind-tanker.jpg`, `ind-delivery.jpg`, `ind-corporate.jpg`.
+- Use `model: "standard"` (premium is reserved for typography-heavy images; standard delivers photorealistic hero-quality at lower cost). Confirm if you'd prefer `premium`.
+- Dimensions: 1056×1056 (imagegen requires multiples of 32; 1055 isn't valid). The component renders them in a 4:5 aspect container with `object-cover`, so square source works fine.
+
+## Confirm before I build
+
+- OK to overwrite the 8 existing `ind-*.jpg` files?
+- Use `standard` quality (faster/cheaper, photoreal) or `premium` (highest fidelity, slower)?
