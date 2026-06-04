@@ -1,13 +1,13 @@
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import logistics from "@/assets/ind-logistics.jpg";
-import school from "@/assets/ind-school.jpg";
-import mining from "@/assets/ind-mining.jpg";
-import construction from "@/assets/ind-construction.jpg";
-import rental from "@/assets/ind-rental.jpg";
-import tanker from "@/assets/ind-tanker.jpg";
-import delivery from "@/assets/ind-delivery.jpg";
-import corporate from "@/assets/ind-corporate.jpg";
+import logistics from "@/assets/ind-logistics.webp";
+import school from "@/assets/ind-school.webp";
+import mining from "@/assets/ind-mining.webp";
+import construction from "@/assets/ind-construction.webp";
+import rental from "@/assets/ind-rental.webp";
+import tanker from "@/assets/ind-tanker.webp";
+import delivery from "@/assets/ind-delivery.webp";
+import corporate from "@/assets/ind-corporate.webp";
 
 const items = [
   { img: logistics, title: "Logistics & Transport", desc: "Long-haul fleets", alt: "Logistics and transport fleet GPS tracking" },
