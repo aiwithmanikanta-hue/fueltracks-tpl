@@ -59,7 +59,7 @@ export function Header() {
             <a href="http://fueltracks.online/gps/public/login" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider glass hover:border-primary/40 transition-colors">
               <LogIn className="size-3.5 text-primary" /> LIVE LOGIN
             </a>
-            <a href="#" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider bg-primary text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:shadow-glow hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out">
+            <a href="http://admin.fueltracks.in/login" className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold tracking-wider bg-primary text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:shadow-glow hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out">
               <Shield className="size-3.5" /> ADMIN LOGIN
             </a>
           </div>
@@ -84,7 +84,7 @@ export function Header() {
             ))}
             <div className="grid grid-cols-2 gap-2 mt-2">
               <a href="http://fueltracks.online/gps/public/login" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl glass">LIVE LOGIN</a>
-              <a href="#" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl bg-primary text-primary-foreground">ADMIN LOGIN</a>
+              <a href="http://admin.fueltracks.in/login" className="text-center px-4 py-3 text-xs font-bold tracking-wider rounded-xl bg-primary text-primary-foreground">ADMIN LOGIN</a>
             </div>
           </div>
         )}
