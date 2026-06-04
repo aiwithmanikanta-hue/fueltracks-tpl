@@ -39,7 +39,7 @@ const products = [
     slug: "gps-tracking-device",
     icon: Cpu,
     image: fttplGpsDevice.url,
-    name: "GPS Tracking Device",
+    name: "VLTD-AIS GPS Tracking Device",
     tag: "FT-GPS-Pro",
     desc: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.",
     cta: "Enquire Now",
