@@ -142,7 +142,7 @@ export function Contact() {
                       <div className="text-[11px] text-muted-foreground uppercase tracking-wider">Phone</div>
                       <a href="tel:+917337433351" className="block text-sm font-medium hover:text-primary">+91 73374 33351</a>
                       <a href="tel:+917337433352" className="block text-sm font-medium hover:text-primary">+91 73374 33352</a>
-                      <a href="tel:+919491666914" className="block text-sm font-medium hover:text-primary">+91 94916 66914</a>
+                      <a href="tel:04035651100" className="block text-sm font-medium hover:text-primary">04035651100</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
