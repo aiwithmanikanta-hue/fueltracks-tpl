@@ -5,8 +5,8 @@ import {
   Route, Users, Map, Zap,
   type LucideIcon,
 } from "lucide-react";
-import sensorImg from "@/assets/products/ft-cfs-1000.png";
-import softwareImg from "@/assets/products/ft-cloud-suite.png";
+import sensorImg from "@/assets/products/ft-cfs-1000.webp";
+import softwareImg from "@/assets/products/ft-cloud-suite.webp";
 import gpsImg1 from "@/assets/gps-tracker-main.jpg.asset.json";
 import gpsImg2 from "@/assets/gps-device-2.jpg.asset.json";
 
