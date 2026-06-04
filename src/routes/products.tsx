@@ -1,8 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Cpu, Droplet, Monitor, Download, ArrowRight, MessageCircle } from "lucide-react";
+import { Cpu, Droplet, Monitor, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/fttpl-gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
