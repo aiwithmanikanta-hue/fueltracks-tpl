@@ -86,7 +86,7 @@ export function DashboardShowcase() {
                 <div className="space-y-3">
                   <Card title="Live Notifications">
                     {[
-                      { i: AlertTriangle, c: "text-accent-red", t: "Fuel drain on TS-09-EH", s: "2 min" },
+                      { i: AlertTriangle, c: "text-accent-red", t: "Fuel drain 20Liters", s: "2 min" },
                       { i: Truck, c: "text-primary", t: "AP-37-AB entered Vizag", s: "8 min" },
                       { i: Activity, c: "text-accent-green", t: "Trip completed — 286 km", s: "21 min" },
                     ].map((n, i) => (
