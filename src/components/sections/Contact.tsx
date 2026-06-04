@@ -118,9 +118,22 @@ export function Contact() {
                 <h3 className="text-xl font-semibold">Fuel Tracks Technologies Pvt Ltd</h3>
 
                 <ul className="mt-5 space-y-4 text-sm">
-                  <Info icon={MapPin} label="Office" value="Hyderabad, Telangana, India" />
                   <li className="flex items-start gap-3">
                     <div className="size-10 rounded-lg bg-primary/15 grid place-items-center text-primary shrink-0">
+                      <MapPin className="size-4" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] text-muted-foreground uppercase tracking-wider">Office</div>
+                      <a
+                        href="https://maps.app.goo.gl/oSUTUMM2ynC87BKTA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium hover:text-primary transition-colors"
+                      >
+                        Hyderabad, Telangana, India
+                      </a>
+                    </div>
+                  </li>
                       <Phone className="size-4" />
                     </div>
                     <div className="leading-tight">
