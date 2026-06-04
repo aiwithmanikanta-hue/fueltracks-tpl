@@ -60,7 +60,7 @@ export function ProductHero({ product }: { product: Product }) {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-semibold text-white hover:bg-navy/90 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
             >
               <Calendar className="size-4" /> Request Demo
             </Link>

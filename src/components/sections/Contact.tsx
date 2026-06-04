@@ -69,7 +69,7 @@ export function Contact() {
                     name="subject"
                     required
                     defaultValue=""
-                    className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
                   >
                     <option value="" disabled>Select a topic…</option>
                     <option value="gps">GPS Device</option>
@@ -85,7 +85,7 @@ export function Contact() {
                     name="message"
                     required
                     rows={4}
-                    className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all resize-none placeholder:text-foreground/50"
+                    className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all resize-none placeholder:text-foreground/50"
                     placeholder="Tell us about your fleet..."
                   />
                 </div>
@@ -95,7 +95,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={submitting || sent}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow bg-slate-500 hover:bg-slate-600 hover:shadow-glow hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:shadow-glow hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {sent
                     ? "Sent — we'll be in touch ✓"
@@ -187,7 +187,7 @@ function Field({ label, type, name, id }: { label: string; type: string; name: s
         type={type}
         name={name}
         required
-        className="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
+        className="mt-1 w-full rounded-xl bg-card border border-border px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all"
       />
     </div>
   );

@@ -23,7 +23,7 @@ export function DashboardMock() {
         </div>
 
         {/* Map */}
-        <div className="mt-3 relative h-[55%] rounded-2xl overflow-hidden bg-[oklch(0.14_0.04_260)] border border-white/5">
+        <div className="mt-3 relative h-[55%] rounded-2xl overflow-hidden bg-secondary border border-border">
           <svg viewBox="0 0 400 260" className="w-full h-full" aria-hidden>
             <defs>
               <linearGradient id="mapBg" x1="0" x2="1" y1="0" y2="1">

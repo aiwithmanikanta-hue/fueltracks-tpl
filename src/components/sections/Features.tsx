@@ -72,7 +72,7 @@ function LiveTrackingVisual() {
         <span className="flex items-center gap-2"><span className="size-1.5 rounded-full bg-accent-green animate-pulse-dot" /> Live · 4 vehicles</span>
         <span className="font-mono">17.3850°N 78.4867°E</span>
       </div>
-      <div className="relative h-[calc(100%-2rem)] rounded-2xl overflow-hidden bg-[oklch(0.14_0.04_260)] border border-white/5">
+      <div className="relative h-[calc(100%-2rem)] rounded-2xl overflow-hidden bg-secondary border border-border">
         <iframe
           className="absolute inset-0 w-full h-full"
           src="https://www.youtube.com/embed/Z2pAeH0HFdA?autoplay=1&mute=1&loop=1&playlist=Z2pAeH0HFdA&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0"
