@@ -46,7 +46,7 @@
   --radius: 1rem;
 
   /* Mint & Sky palette — fresh, premium, SaaS */
-  --background: #D4EEED;              /* primary mint */
+  --background: #E5F1F1;              /* primary mint */
   --foreground: #0F172A;              /* slate-900 text */
   --card: #FFFFFF;
   --card-foreground: #0F172A;
@@ -64,7 +64,7 @@
   --secondary-foreground: #0F172A;
   --muted: #F8FCFC;
   --muted-foreground: #64748B;
-  --accent: #D4EEED;
+  --accent: #E5F1F1;
   --accent-foreground: #0F172A;
 
   /* Status accents */
@@ -84,13 +84,13 @@
 
   --gradient-hero:
     radial-gradient(ellipse at 15% 0%, rgba(14, 165, 233, 0.12), transparent 60%),
-    radial-gradient(ellipse at 85% 100%, rgba(212, 238, 237, 0.85), transparent 60%),
+    radial-gradient(ellipse at 85% 100%, rgba(229, 241, 241, 0.85), transparent 60%),
     linear-gradient(180deg, #FFFFFF, #F8FCFC);
   --gradient-primary: linear-gradient(135deg, #0EA5E9, #0284C7);
   --gradient-navy: linear-gradient(180deg, #0F172A, #1E293B);
   --gradient-glow: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.18), transparent 70%);
 
-  --shadow-elegant: 0 10px 30px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-elegant: 0 8px 25px rgba(15, 23, 42, 0.05);
   --shadow-glow: 0 8px 24px rgba(14, 165, 233, 0.28);
   --shadow-soft: 0 4px 16px rgba(15, 23, 42, 0.05);
 }
@@ -145,7 +145,7 @@
       linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
     background-size: 56px 56px;
   }
-  .shadow-card { box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06), 0 1px 4px rgba(15, 23, 42, 0.04); }
+  .shadow-card { box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05); }
   .shadow-card-hover { box-shadow: 0 12px 40px -12px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06); }
   .shadow-elegant { box-shadow: var(--shadow-elegant); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
