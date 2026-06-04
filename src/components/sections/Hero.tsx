@@ -3,6 +3,7 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 import heroTruck from "@/assets/hero-bg.png";
+import dashboardVideo from "@/assets/dashboard-map.mp4.asset.json";
 
 export function Hero() {
   return (
@@ -97,13 +98,15 @@ export function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-elegant glass-strong flex items-center justify-center bg-gradient-to-br from-muted/60 to-muted/30">
-              <div className="text-center p-8">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <PlayCircle className="size-10 text-primary/60" />
-                </div>
-                <p className="text-sm text-muted-foreground font-medium">Demo Video Coming Soon</p>
-              </div>
+            <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-elegant glass-strong bg-gradient-to-br from-muted/60 to-muted/30">
+              <video
+                src={dashboardVideo.url}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
