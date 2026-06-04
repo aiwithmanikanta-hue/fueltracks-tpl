@@ -10,14 +10,14 @@ import delivery from "@/assets/ind-delivery.jpg";
 import corporate from "@/assets/ind-corporate.jpg";
 
 const items = [
-  { img: logistics, title: "Logistics & Transport", desc: "Long-haul fleets" },
-  { img: school, title: "School Buses", desc: "Child safety & parent app" },
-  { img: mining, title: "Mining", desc: "Heavy off-road tracking" },
-  { img: construction, title: "Construction", desc: "Earth movers & cranes" },
-  { img: rental, title: "Car Rentals", desc: "Self-drive monitoring" },
-  { img: tanker, title: "Fuel Tankers", desc: "Theft & leak detection" },
-  { img: delivery, title: "Delivery Services", desc: "Last-mile visibility" },
-  { img: corporate, title: "Corporate Fleets", desc: "Executive & employee transport" },
+  { img: logistics, title: "Logistics & Transport", desc: "Long-haul fleets", alt: "Logistics and transport fleet GPS tracking" },
+  { img: school, title: "School Buses", desc: "Child safety & parent app", alt: "School bus tracking with parent safety app" },
+  { img: mining, title: "Mining", desc: "Heavy off-road tracking", alt: "Mining vehicle GPS tracking and fuel monitoring" },
+  { img: construction, title: "Construction", desc: "Earth movers & cranes", alt: "Construction fleet tracking for earth movers and cranes" },
+  { img: rental, title: "Car Rentals", desc: "Self-drive monitoring", alt: "Car rental self-drive vehicle monitoring" },
+  { img: tanker, title: "Fuel Tankers", desc: "Theft & leak detection", alt: "Fuel tanker theft and leak detection system" },
+  { img: delivery, title: "Delivery Services", desc: "Last-mile visibility", alt: "Last-mile delivery vehicle tracking" },
+  { img: corporate, title: "Corporate Fleets", desc: "Executive & employee transport", alt: "Corporate fleet tracking for executive and employee transport" },
 ];
 
 export function Industries() {
@@ -37,7 +37,7 @@ export function Industries() {
               <div className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-white/40 border border-white/20 cursor-pointer">
                 <img
                   src={it.img}
-                  alt={it.title}
+                  alt={it.alt}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />

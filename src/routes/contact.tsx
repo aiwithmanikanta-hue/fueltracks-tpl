@@ -11,7 +11,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Talk to our team — demos, quotes and dealership inquiries." },
       { property: "og:url", content: "https://fuel-track-cosmos.lovable.app/contact" },
     ],
-    links: [{ rel: "canonical", href: "https://fueltracksfttpl.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://fuel-track-cosmos.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
