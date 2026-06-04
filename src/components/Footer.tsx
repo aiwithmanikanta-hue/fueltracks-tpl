@@ -58,7 +58,7 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-foreground tracking-wider">CONTACT US</h4>
             <ul className="mt-4 space-y-3.5 text-sm text-muted-foreground">
-              <li className="flex gap-2.5"><MapPin className="size-4 mt-0.5 text-primary shrink-0" /> Fuel Tracks Technologies,<br />Hyderabad, India</li>
+              <li className="flex gap-2.5"><MapPin className="size-4 mt-0.5 text-primary shrink-0" /> <a href="https://maps.app.goo.gl/oSUTUMM2ynC87BKTA" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Fuel Tracks Technologies,<br />Hyderabad, India</a></li>
               <li className="flex gap-2.5"><Phone className="size-4 mt-0.5 text-primary shrink-0" />
                 <div>
                   <a href="tel:+917337433351" className="block hover:text-primary">+91 73374 33351</a>

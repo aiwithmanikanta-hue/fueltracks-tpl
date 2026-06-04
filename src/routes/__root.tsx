@@ -70,6 +70,8 @@ const orgJsonLd = JSON.stringify({
   email: "info@fueltracks.in",
   priceRange: "$$",
   address: { "@type": "PostalAddress", addressLocality: "Hyderabad", addressRegion: "Telangana", addressCountry: "IN" },
+  geo: { "@type": "GeoCoordinates", latitude: 17.3454351, longitude: 78.5239719 },
+  hasMap: "https://maps.app.goo.gl/oSUTUMM2ynC87BKTA",
   areaServed: "IN",
 });
 
