@@ -1,33 +1,28 @@
-## Goal
-Swap the site-wide primary background from `#D4EEED` to `#E5F1F1` and align card/border/shadow tokens to the new spec. Keep the existing mint+sky system; only soften the base tint.
+# Update Google Maps location sitewide
+
+Resolved short link `https://maps.app.goo.gl/oSUTUMM2ynC87BKTA` →
+Place: **Fuel Tracks**, coords **17.3454351, 78.5239719**.
+
+Single shared link constant will be used everywhere for consistency:
+`https://maps.app.goo.gl/oSUTUMM2ynC87BKTA` (mobile devices auto-open the Google Maps app via this short link; desktop opens in browser).
 
 ## Changes
 
-### 1. `src/styles.css` — token update
-- `--background: #E5F1F1` (was `#D4EEED`)
-- `--accent: #E5F1F1` (keep accent aligned with new base)
-- `--secondary` / `--muted`: stay `#F8FCFC`
-- `--card: #FFFFFF`, `--card-foreground: #0F172A`
-- `--foreground: #0F172A`, `--muted-foreground: #64748B`
-- Add secondary text token usage: keep `#475569` available via existing `text-slate-*` utilities (no new token needed)
-- `--border: rgba(15,23,42,0.08)`
-- `--primary: #0EA5E9`, hover `#0284C7` (already set; verify CTA hover uses `#0284C7`)
-- Update `--gradient-hero` second radial stop from `rgba(212,238,237,…)` → `rgba(229,241,241,…)`
-- Soften `--shadow-elegant` to `0 8px 25px rgba(15,23,42,0.05)` to match card spec
-- Card utility shadow (`.shadow-card`) → `0 8px 25px rgba(15,23,42,0.05)`
+### 1. `src/components/sections/Contact.tsx`
+- Replace the iframe `src` with a new embed centered on the new coordinates (zoom ~17, marker on the exact spot), update `title` to "Fuel Tracks Technologies office location".
+- Update the `<Info icon={MapPin} label="Office" value="..." />` value to a more specific address line (keep "Hyderabad, Telangana, India" suffix) and wrap it in an `<a>` to the short link (new tab, `rel="noopener noreferrer"`, hover styling consistent with other links).
+- Add a "Get Directions" button under the map (or convert the existing map card into a clickable surface) linking to the short link.
 
-### 2. Component sweep (only where `#D4EEED` is hardcoded)
-Search and replace any literal `#D4EEED` references in components with `var(--background)` / `bg-background`. Based on prior edits the palette is token-driven, so this should be a no-op or minimal.
+### 2. `src/components/Footer.tsx`
+- Wrap the address line (`Fuel Tracks Technologies, Hyderabad, India`) in an `<a href="https://maps.app.goo.gl/oSUTUMM2ynC87BKTA" target="_blank" rel="noopener noreferrer">` with hover:text-primary.
 
-### 3. Card radius
-Confirm Tailwind `rounded-2xl` (16px) is used on primary cards (`GlassCard`, product cards). No structural changes — only adjust if a card currently uses `rounded-xl` in a hero/product context.
+### 3. `src/routes/__root.tsx`
+- No coordinate change needed in JSON-LD beyond what already lists Hyderabad/Telangana/IN. (Skip unless we want to add geo lat/long — will add `geo` block with the new lat/long for SEO accuracy.)
 
-## Out of scope
-- No layout, copy, routing, or component-structure changes
-- No dark-mode token changes
-- No new pages or sections
-- No logic/business changes
-
-## Files touched
-- `src/styles.css` (primary)
-- Any component file containing a literal `#D4EEED` (sweep only)
+## Technical notes
+- New embed URL pattern:
+  `https://www.google.com/maps?q=17.3454351,78.5239719&hl=en&z=17&output=embed`
+  (lightweight, no API key, marker pinned on the coordinate, works on all devices, responsive via existing 100%/100% sizing).
+- Mobile behavior: `maps.app.goo.gl` short links are handled by the Google Maps app on Android/iOS automatically; no extra logic required.
+- Keep all existing styling (glass-strong card, rounded-3xl, h-[260px], filter inversion) so the visual design stays identical.
+- No business logic, routing, or data-layer changes.
