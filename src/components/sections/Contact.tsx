@@ -174,16 +174,27 @@ export function Contact() {
                 </div>
               </div>
 
-              <div className="glass-strong rounded-3xl overflow-hidden shadow-elegant h-[260px]">
-                <iframe
-                  title="Hyderabad office location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.74386730378!2d78.26795625!3d17.4123487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: "invert(0.92) hue-rotate(180deg) brightness(0.85) contrast(0.9)" }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+              <div className="glass-strong rounded-3xl overflow-hidden shadow-elegant">
+                <div className="h-[260px]">
+                  <iframe
+                    title="Fuel Tracks Technologies office location"
+                    src="https://www.google.com/maps?q=17.3454351,78.5239719&hl=en&z=17&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+                <a
+                  href="https://maps.app.goo.gl/oSUTUMM2ynC87BKTA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors border-t border-border"
+                >
+                  <MapPin className="size-4" /> Get Directions
+                </a>
               </div>
             </div>
           </Reveal>
