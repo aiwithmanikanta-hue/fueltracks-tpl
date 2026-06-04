@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fueltracksfttpl.lovable.app/sitemap.xml
+Sitemap: https://fueltracks-tpl.lovable.app/sitemap.xml

@@ -36,6 +36,7 @@ export const Route = createFileRoute("/dealers")({
 function DealersPage() {
   return (
     <div className="pt-24">
+      <h1 className="sr-only">Fuel Tracks Dealer Program</h1>
       <DealerProgram />
       <FAQ />
       <Contact />
