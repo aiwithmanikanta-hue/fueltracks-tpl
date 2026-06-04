@@ -61,7 +61,7 @@ export const products: Product[] = [
   {
     slug: "gps-tracking-device",
     sku: "FT-GPS-Pro",
-    name: "GPS Tracking Device",
+    name: "VLTD-AIS GPS Tracking Device",
     tagline: "Track smarter, drive safer and manage fleets better with real-time GPS, route history and instant security alerts.",
     description:
       "The GPS Tracking Device is a reliable and intelligent vehicle tracking solution designed to provide real-time location monitoring, route tracking, security alerts, and complete fleet management capabilities. Whether you manage logistics, school buses, commercial vehicles, construction equipment, or personal vehicles, this device gives complete visibility and control through a powerful web and mobile platform.",
