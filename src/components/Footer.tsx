@@ -63,7 +63,7 @@ export function Footer() {
                 <div>
                   <a href="tel:+917337433351" className="block hover:text-primary">+91 73374 33351</a>
                   <a href="tel:+917337433352" className="block hover:text-primary">+91 73374 33352</a>
-                  <a href="tel:04035651100" className="block hover:text-primary">04035651100</a>
+                  <a href="tel:04035651100" className="block hover:text-primary">040-35651100</a>
                 </div>
               </li>
               <li className="flex gap-2.5"><Mail className="size-4 mt-0.5 text-primary shrink-0" />
