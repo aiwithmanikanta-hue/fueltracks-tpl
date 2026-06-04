@@ -1,9 +1,8 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Activity, AlertTriangle, Fuel, Truck } from "lucide-react";
+import { Activity, AlertTriangle, Fuel, Truck, MapPin } from "lucide-react";
 import { useRef, type MouseEvent } from "react";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeader } from "../ui/SectionHeader";
-import dashboardMap from "@/assets/dashboard-map.mp4.asset.json";
 
 
 export function DashboardShowcase() {
