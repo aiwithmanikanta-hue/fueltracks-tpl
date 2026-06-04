@@ -1,6 +1,7 @@
-import { Apple, Bell, Fuel, MapPin } from "lucide-react";
+import { Bell, Fuel, MapPin } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 import mobileScreens from "@/assets/mobile-app-screens.jpeg.asset.json";
+import appleLogo from "@/assets/apple-logo.png.asset.json";
 
 
 
@@ -46,7 +47,7 @@ export function MobileApp() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#" className="inline-flex items-center gap-3 rounded-xl glass-strong px-5 py-3 hover:border-primary/40 transition-colors">
-                <Apple className="size-6" />
+                <img src={appleLogo.url} alt="Apple" className="size-6 object-contain" />
                 <div className="text-left leading-tight">
                   <div className="text-[10px] text-muted-foreground">Download on the</div>
                   <div className="font-semibold text-sm">App Store</div>
