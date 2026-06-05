@@ -1,81 +1,88 @@
-## Findings
+# Contact Page Redesign + WhatsApp Lead Enquiry
 
-This codebase is not Laravel; it is a React/TanStack Start project. The media issue is caused mainly by Lovable asset pointer files such as `*.asset.json` whose URLs point to `"/__l5e/assets-v1/..."`. Those URLs work inside Lovable, but a downloaded ZIP or separate localhost/static host usually cannot serve that Lovable asset route.
+## What changes
 
-Current media inventory:
+Rebuild the Contact form so a single "Send Enquiry on WhatsApp" click:
+1. Validates required fields,
+2. Saves the lead to Supabase (`contact_leads`),
+3. Opens WhatsApp (app on mobile, Web on desktop) with a pre-filled structured message to the company number `+91 73374 33351` (already in `src/lib/whatsapp.ts`).
 
-- 20 Lovable-hosted asset pointers in `src/assets/*.asset.json`
-- 2 video pointers: `dashboard-map.mp4.asset.json`, `dashboard-preview.mp4.asset.json`
-- Multiple image/icon pointers for product images, maps, logo, Apple logo, RFID/GPS/fuel icons, mobile screenshots, feature charts
-- Local bundled assets already exist for many `.webp` images under `src/assets/` and `src/assets/products/`
-- `public/` currently contains only `favicon.ico`, `llms.txt`, and `robots.txt`
-- There are also external SEO image/logo URLs in `src/routes/__root.tsx`
+## Form fields
 
-## Implementation plan
+| Field | Required | Control |
+|---|---|---|
+| Full Name | ✓ | text |
+| Phone Number | ✓ | tel (10-digit India validation) |
+| Email | — | email |
+| City / Location | — | text |
+| Product Interested In | ✓ | select: GPS Tracking Device, Fuel Sensor, AIS-140 Device, Fleet Management Software, School Bus Tracking, Other |
+| Message / Requirement | ✓ | textarea |
 
-1. **Create a self-contained public asset structure**
-   - Add local folders under `public/`:
-     ```text
-     public/images/
-     public/videos/
-     public/icons/
-     public/products/
-     public/animations/
-     ```
-   - Keep current local `src/assets/*.webp` imports that already bundle correctly unless moving them is needed for consistency.
+Inline error messages below each field; disable submit while sending.
 
-2. **Download every Lovable-hosted media asset**
-   - Read all `*.asset.json` files.
-   - Fetch each `url` from the Lovable preview/published asset route.
-   - Save the actual binary files locally with stable names, preserving extension/content type.
-   - Place videos in `public/videos/`, product/marketing images in `public/images/` or `public/products/`, and small icons/logos in `public/icons/`.
+## WhatsApp message format
 
-3. **Replace CDN-dependent imports**
-   - Remove runtime usage of `.asset.json` URLs from components/data.
-   - Replace patterns like:
-     ```ts
-     import logoAsset from "@/assets/fuel-tracks-logo.png.asset.json";
-     <img src={logoAsset.url} />
-     ```
-     with stable local paths such as:
-     ```ts
-     const logo = "/icons/fuel-tracks-logo.png";
-     <img src={logo} />
-     ```
-   - Update all affected files, including:
-     - `src/components/Footer.tsx`
-     - `src/components/sections/About.tsx`
-     - `src/components/sections/DashboardShowcase.tsx`
-     - `src/components/sections/Features.tsx`
-     - `src/components/sections/Hero.tsx`
-     - `src/components/sections/MobileApp.tsx`
-     - `src/routes/about.tsx`
-     - `src/routes/products.tsx`
-     - `src/routes/services.tsx`
-     - `src/data/products.ts`
+```
+Hello Fuel Tracks Team,
 
-4. **Fix external SEO/social media references**
-   - Replace `https://fuel-track-cosmos.lovable.app/logo.png` and R2-hosted Open Graph/Twitter image URLs in `src/routes/__root.tsx` with local public asset URLs.
-   - Keep metadata content unchanged except the media URLs.
+I would like to enquire about your services.
 
-5. **Audit for remaining broken media dependencies**
-   - Search for remaining references to:
-     - `*.asset.json`
-     - `/__l5e/`
-     - external media URLs
-     - missing `/assets/...` paths
-   - Confirm all referenced local files exist exactly, including case-sensitive filenames.
+Name: {name}
+Phone Number: {phone}
+Email: {email or "—"}
+Location: {city or "—"}
+Product Interested In: {product}
 
-6. **Verify videos and images**
-   - Ensure video tags still use `autoPlay`, `muted`, `loop`, and `playsInline` exactly as before.
-   - Keep all image alt text, dimensions, classes, animations, and layout unchanged.
-   - Do not redesign, recolor, or alter content.
+Message:
+{message}
 
-7. **Validation**
-   - Run a targeted asset existence audit script.
-   - Run the project test/build validation available in this environment after edits.
-   - Inspect browser/network output for media 404s if the preview is available.
+Please contact me with more information.
 
-## Expected result
+Thank you.
+```
 
-After implementation, the downloaded project will no longer depend on Lovable asset-serving URLs for images, videos, icons, or media. Running locally, building for production, deploying from GitHub, or uploading the build to another host will use only files included in the project.
+Open `https://wa.me/917337433351?text=<encoded>` in a new tab. `wa.me` automatically routes to the app on mobile and WhatsApp Web on desktop.
+
+## Supabase persistence
+
+Reuse the existing `submitContactLead` server function (`src/lib/contact.functions.ts`) and extend it to accept `city` and `product` (stored in existing `subject` field as `product` value, plus appended to `message`, OR added as new columns via migration).
+
+**Schema decision:** add two new nullable columns to `contact_leads`:
+- `city text`
+- `product text`
+
+Migration runs before code changes that depend on the columns.
+
+The form calls the server fn first; on success it then opens the WhatsApp URL. If the DB write fails, still open WhatsApp (lead capture must not block enquiry) but log the error.
+
+## UI redesign
+
+Keep the existing two-column layout (form left, contact info + map right) and the glassmorphism look already in `Contact.tsx`. Refinements:
+- Larger, clearer labels with required-asterisks
+- Floating helper text under inputs
+- Replace the generic blue "Send Message" with a green WhatsApp-branded button (`WhatsAppIcon` already exists at `src/components/icons/WhatsAppIcon.tsx`): "Send Enquiry on WhatsApp"
+- Add a small secondary line: "Opens WhatsApp with your details pre-filled"
+- Tighter spacing, consistent border radius, focus rings already in design tokens
+
+No layout/section reordering; the contact-info card, map, and quick-action buttons on the right stay.
+
+## Files touched
+
+- `supabase/migrations/<timestamp>_contact_leads_add_city_product.sql` — add `city`, `product` columns
+- `src/lib/contact.functions.ts` — extend Zod schema + insert with new fields
+- `src/components/sections/Contact.tsx` — new fields, validation, WhatsApp submit handler, button restyle
+- (No changes to `Header`, `Footer`, routes, or other sections.)
+
+## Out of scope
+
+- No changes to other pages, product pages, or the floating WhatsApp button.
+- No auth changes.
+- No new routes.
+
+## Validation / done criteria
+
+- All 4 required fields show inline errors when empty.
+- Submit writes a row to `contact_leads` with all fields populated.
+- Submit opens `wa.me` URL in a new tab with the exact message template above, URL-encoded.
+- Works on mobile (deep-links to WhatsApp app) and desktop (WhatsApp Web).
+- `npm run build` passes with zero TS errors.
