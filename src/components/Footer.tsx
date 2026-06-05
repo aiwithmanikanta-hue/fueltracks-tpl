@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Twitter, Facebook, Youtube } from "lucide-react";
 const fuelTracksLogo = { url: "/icons/fuel-tracks-logo.png" };
 
 export function Footer() {
