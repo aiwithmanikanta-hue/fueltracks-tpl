@@ -22,7 +22,7 @@ export const submitContactLead = createServerFn({ method: "POST" })
     const { error } = await supabaseAdmin.from("contact_leads").insert({
       name: data.name,
       phone: data.phone || null,
-      email: data.email || null,
+      email: data.email || "",
       city: data.city || null,
       product: data.product || null,
       subject: data.subject || data.product || null,
