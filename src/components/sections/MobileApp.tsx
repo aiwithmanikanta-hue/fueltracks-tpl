@@ -53,7 +53,7 @@ export function MobileApp() {
                   <div className="font-semibold text-sm">App Store</div>
                 </div>
               </a>
-              <a href="#" className="inline-flex items-center gap-3 rounded-xl glass-strong px-5 py-3 hover:border-primary/40 transition-colors">
+              <a href="https://play.google.com/store/apps/details?id=com.app.gps.fueltracker&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-xl glass-strong px-5 py-3 hover:border-primary/40 transition-colors">
                 <PlayStoreIcon />
                 <div className="text-left leading-tight">
                   <div className="text-[10px] text-muted-foreground">Get it on</div>
