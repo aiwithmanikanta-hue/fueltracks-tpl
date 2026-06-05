@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Twitter, Facebook, Youtube } from "lucide-react";
 const fuelTracksLogo = { url: "/icons/fuel-tracks-logo.png" };
 
 export function Footer() {
@@ -17,11 +17,12 @@ export function Footer() {
             </p>
             <div className="mt-6 flex gap-2">
               {[
-                { Icon: Linkedin, label: "Fuel Tracks on LinkedIn" },
-                { Icon: Twitter, label: "Fuel Tracks on Twitter" },
-                { Icon: Facebook, label: "Fuel Tracks on Facebook" },
-              ].map(({ Icon, label }) => (
-                <a key={label} href="#" aria-label={label} className="size-9 grid place-items-center rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary hover:scale-110 transition-all">
+                { Icon: Facebook, label: "Fuel Tracks on Facebook", href: "https://www.facebook.com/profile.php?id=61589194031300&sk=about" },
+                { Icon: Instagram, label: "Fuel Tracks on Instagram", href: "https://www.instagram.com/fueltracks.hyd" },
+                { Icon: Twitter, label: "Fuel Tracks on X", href: "https://x.com/FUELTRACKS" },
+                { Icon: Youtube, label: "Fuel Tracks on YouTube", href: "https://youtube.com/@fueltrackstechnologies8665" },
+              ].map(({ Icon, label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="size-9 grid place-items-center rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary hover:scale-110 transition-all">
                   <Icon className="size-4" />
                 </a>
               ))}
