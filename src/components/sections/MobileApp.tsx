@@ -1,7 +1,7 @@
 import { Bell, Fuel, MapPin } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 const mobileScreens = { url: "/images/mobile-app-screens.jpeg" };
-const appleLogo = { url: "/icons/apple-logo.png" };
+
 
 
 
@@ -46,13 +46,6 @@ export function MobileApp() {
             </ul>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#" className="inline-flex items-center gap-3 rounded-xl glass-strong px-5 py-3 hover:border-primary/40 transition-colors">
-                <img src={appleLogo.url} alt="Apple" className="size-6 object-contain" />
-                <div className="text-left leading-tight">
-                  <div className="text-[10px] text-muted-foreground">Download on the</div>
-                  <div className="font-semibold text-sm">App Store</div>
-                </div>
-              </a>
               <a href="https://play.google.com/store/apps/details?id=com.app.gps.fueltracker&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-xl glass-strong px-5 py-3 hover:border-primary/40 transition-colors">
                 <PlayStoreIcon />
                 <div className="text-left leading-tight">
