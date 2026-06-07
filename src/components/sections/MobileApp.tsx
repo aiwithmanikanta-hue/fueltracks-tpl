@@ -1,7 +1,7 @@
 import { Bell, Fuel, MapPin } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 const mobileScreens = { url: "/images/mobile-app-screens.jpeg" };
-const appleLogo = { url: "/icons/apple-logo.png" };
+
 
 
 
