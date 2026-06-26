@@ -1,82 +1,66 @@
-## Phase 2 — Products & Lead Generation
 
-Builds on Phase 1 polish. Keeps brand, logo, colors, navigation, WhatsApp number, Supabase wiring, and existing 3 product detail pages intact. Existing detail page already has Hero / Overview / Features / Specs / How-It-Works / Dashboard / Benefits / Industries / FAQ / Testimonials / CTA / Related / Contact — we polish, don't rebuild.
+# Fuel Tracks Upgrade — Phase 1
 
-### 1. Catalog expansion (`src/data/products.ts`)
+Scope locked to **global design polish + Homepage**. About, Services, Products, Product Details, Contact, Footer come in later phases. No theme change, no color change, no logo change, no content rewrites, no stats changes, no data migrations.
 
-Add 4 new entries with drafted copy + AI-generated product images:
-- `vltd-ais-140-4g-device` — VLTD AIS-140 4G Device
-- `vltd-ais-140-2g-device` — VLTD AIS-140 2G Device
-- `v5-basic-gps-device` — V5 Basic GPS Device
-- `gps-tracking-platform` — GPS Tracking Platform (software)
-- `fleet-management-solutions` — Fleet Management Solutions (software)
-- `asset-tracking-solutions` — Asset Tracking Solutions (software)
+## Guardrails (won't touch)
 
-Existing `gps-tracking-device`, `fuel-sensor`, `fleet-software` (CCTV) stay. New entries reuse the Product shape so the existing detail page renders them automatically. Spec values for AIS-140 devices follow standard AIS-140 norms (4G LTE / 2G fallback, GNSS GPS+GLONASS+IRNSS, 2-axis accelerometer, 8hr backup battery, panic button, IP65, ARAI cert) — drafted as reasonable defaults you can edit.
+- Brand colors, logo, brand name, existing palette in `src/styles.css`
+- Navigation structure and routes
+- WhatsApp integration, Supabase wiring, Contact form logic, Play Store link, social URLs
+- Products list / data source (stays hardcoded)
+- Stats numbers (kept as-is)
+- Existing copy unless a line is visibly broken
 
-Product images generated via `imagegen` at premium tier (transparent PNGs on neutral background) and stored under `src/assets/products/`. Uploaded as Lovable Assets so they don't bloat the repo.
+## What Phase 1 ships
 
-### 2. Products grid redesign (`src/routes/products.tsx`)
+### 1. Global polish system (applies sitewide, not just homepage)
 
-- Replace flat 3-card grid with a filtered catalog: chip filter row (All / Devices / Sensors / Software) above the grid.
-- Each card: premium image, name, category tag, short description, 2–3 key feature pills, "View Details" primary button, WhatsApp icon button. Hover: lift + soft shadow + image zoom (already in Phase 1 utilities).
-- Uniform aspect ratios across breakpoints, consistent padding, scroll-reveal stagger.
-- Cards link to `/products/$slug` via `<Link to params>` (no `<a href>`).
+Adds reusable primitives so later phases inherit the look for free.
 
-### 3. Detail page polish (existing components, surgical edits)
+- **Tokens added to `src/styles.css`** (no color changes): spacing rhythm, radius scale (`--radius-card: 18px`), elevation scale (`--shadow-sm/md/lg/glow`), motion tokens (`--ease-out-soft`, durations), glass surface token using existing brand color with alpha.
+- **Utilities** (`@utility`): `card-premium`, `glass-surface`, `hover-lift`, `reveal-on-scroll`, `gradient-border`. All built from existing brand tokens.
+- **Scroll reveal**: lightweight IntersectionObserver hook (`useReveal`) — no new heavy deps. Respects `prefers-reduced-motion`.
+- **Typography hierarchy pass**: tighten heading sizes/leading/tracking in `styles.css` only (same font families already loaded). Larger H1, better H2/H3 rhythm, improved body line-height.
+- **Button consistency audit**: verify shadcn Button variants render consistently; add one `variant="premium"` (gradient + soft shadow) for hero CTAs. Existing buttons untouched unless they're the hero CTA.
+- **Accessibility sweep on homepage only this phase**: focus-visible rings on interactive elements, `aria-label` on icon-only buttons in hero/nav, `h-dvh` swap if `h-screen` is used in hero.
 
-- **ProductSpecs**: convert to single-open accordion (controlled `openIndex` state) grouped by section.
-- **ProductFAQ**: enforce single-open accordion (one `value` controlled).
-- **ProductHero**: add a thumbnail gallery + lightbox-style zoom for `product.images`. Reuse `framer-motion`; no new heavy lib. Add a "Download Brochure" button next to Get Quote / WhatsApp. Brochure URL resolves to `/brochures/{slug}.pdf`; when missing, button renders disabled with "Brochure coming soon" tooltip. Detection: a small `BROCHURES` set in `src/data/products.ts` (empty for now) — easy toggle when PDFs are dropped into `/public/brochures/`.
-- **ProductHero CTAs**: already pre-fill WhatsApp via `buildProductEnquiryUrl`. Update message template to match the requested format (Product Details / Pricing / Installation / Demo bullets).
+### 2. Homepage redesign (`src/routes/index.tsx` + its section components)
 
-### 4. Lead-generation form (`src/components/sections/Contact.tsx` + product `ProductContact`)
+Preserves every existing section and its content. Visual upgrade only.
 
-- Add **Company Name** field (currently missing). Refresh validation with zod-style rules inline (already validated; just add company).
-- Pre-select "Product Interested" when arriving from a product page (already happens via `ProductContact`; verify and extend new product names in the dropdown).
-- On submit: insert into `contact_leads` (already wired) + open WhatsApp with the structured message + show inline success card. No DB schema change needed — `contact_leads` already has 14 columns including company. Confirm via a read query before editing.
-- Premium UI pass: floating labels, focus rings using brand color, success state with check animation.
+- **Hero**: larger headline, refined CTA stack, animated background (soft floating blurred brand-color orbs + subtle grid), keep existing dashboard/device imagery. Add scroll-down cue.
+- **Stats**: animated count-up on scroll into view, same numbers as today, premium card row with subtle dividers/glass.
+- **Product Showcase**: switch to premium card grid (rounded 18px, soft shadow, hover lift, image zoom on hover). WhatsApp enquiry button preserved.
+- **Industries**: modern icon cards (Logistics, Transportation, School Buses, Construction, Mining, Fuel Tankers) using lucide icons; only if section exists — otherwise added as a new section using current content tone.
+- **Why Choose Fuel Tracks**: feature cards w/ icon + title + 1-line description, gradient border on hover.
+- **CTA band**: full-width section with WhatsApp + Contact buttons (existing URLs).
+- **Scroll-reveal animations** wired into each section via the new hook.
 
-### 5. Google Maps on Contact page
+### 3. Performance hygiene (homepage only this phase)
 
-- Add a responsive embedded map section above the contact form. Since no office address was provided, use a generic Hyderabad pin (Fuel Tracks HQ — Hyderabad, India) via the free Google Maps `https://www.google.com/maps?...&output=embed` iframe (no API key needed, no connector required). Includes "Get Directions" button (deep-link to Google Maps) and an Office Address / Business Hours card next to the map.
-- When you give me the real address later, it's a one-line swap.
+- Lazy-load below-the-fold sections via dynamic import where worthwhile.
+- Add `loading="lazy"` + explicit width/height to non-hero images.
+- Preload hero image via route `head().links`.
 
-### 6. Routing / SEO
+## Out of scope this phase (explicit)
 
-- New product slugs route automatically through `/products/$slug` — no new route files needed. Each new product gets its own `head()` meta via existing loader (title, description, og:image from product image).
-- Update sitemap if one exists; otherwise no action.
+About page, Services page, Products grid page, Product Details pages, Contact page redesign, Footer redesign, sitewide Lighthouse 95+ target, WebP/WebM conversion pipeline, code-splitting overhaul. These are Phase 2–4.
 
-### 7. Performance hygiene (homepage + products only)
+## Files I expect to touch
 
-- `loading="lazy"` + `decoding="async"` on every product image.
-- Preload hero product image in `head().links` on `/products/$slug`.
-- Defer non-critical sections of the detail page below the fold (already largely structured; just confirm `<Reveal>` usage is consistent).
+- `src/styles.css` — tokens, utilities, type scale
+- `src/routes/index.tsx` — section composition + reveal wiring
+- `src/components/sections/Hero.tsx`, `Stats.tsx`, `Products.tsx` (or equivalent), `Industries.tsx`, `WhyChoose.tsx`, `CTA.tsx` — visual upgrades only
+- `src/hooks/use-reveal.ts` — new
+- `src/components/ui/button.tsx` — add `premium` variant only if missing
 
-### Files touched
+## Acceptance for Phase 1
 
-- `src/data/products.ts` — add 6 products + brochure set
-- `src/routes/products.tsx` — redesigned grid + category filter
-- `src/components/product/ProductHero.tsx` — gallery, zoom, brochure button, updated CTA template
-- `src/components/product/ProductSpecs.tsx` — single-open accordion
-- `src/components/product/ProductFAQ.tsx` — single-open accordion
-- `src/components/product/ProductContact.tsx` — add Company field, pre-select product
-- `src/components/sections/Contact.tsx` — add Company field, polish
-- `src/routes/contact.tsx` — add Map section component
-- `src/components/sections/OfficeMap.tsx` (new) — embed + directions + address card
-- `src/lib/whatsapp.ts` — refine `buildProductEnquiryUrl` message template
-- `src/assets/products/*` — new generated images (uploaded as Lovable Assets)
+- Homepage looks visibly premium and modern; existing brand identity intact.
+- All existing homepage links/CTAs still work (WhatsApp, Contact, Play Store, social).
+- No regressions on mobile/tablet/desktop at 360 / 768 / 1280 / 1440.
+- No console errors; build passes.
+- Other routes still render (no global breakage from the new tokens/utilities).
 
-### Out of scope (later phases)
-
-- About + Services redesign (Phase 3)
-- Footer + sitewide perf pass / Lighthouse 95+ enforcement / WebP/WebM pipeline (Phase 4)
-- Real brochure PDFs, real office address, real product photography — wire-ready, drop-in later.
-
-### Acceptance
-
-- 9 products visible in the grid, filter chips work, all link to their detail pages with no 404s.
-- Each detail page renders hero with gallery + zoom, single-open specs accordion, single-open FAQ accordion, brochure button (disabled state acceptable), WhatsApp with new message format.
-- Contact form has Company field and saves to `contact_leads`; success state visible.
-- Map renders responsively with Get Directions deep-link.
-- No console errors, no broken images (placeholders are real generated images), build passes.
+After you approve, I implement Phase 1 in one go and then we move to Phase 2 (About + Services).

@@ -1,36 +1,34 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { Cpu, Droplet, Monitor, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
-import { products, type Product, type ProductCategory } from "@/data/products";
+const fttplGpsDevice = { url: "/images/fttpl-gps-device.png" };
+const fuelSensorImage = { url: "/images/fuel-sensor.png" };
+const fleetCameraImage = { url: "/images/fleet-camera.png" };
 
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products — GPS, Fuel Sensors & Fleet Software | Fuel Tracks" },
-      { name: "description", content: "Explore the complete Fuel Tracks catalogue — AIS-140 GPS trackers, basic GPS devices, capacitive fuel sensors and fleet management software for every commercial fleet." },
+      { title: "Products — GPS, Fuel Sensors & Software | Fuel Tracks" },
+      { name: "description", content: "Explore Fuel Tracks products — GPS tracking devices, capacitive fuel level sensors and fleet management software for trucks, buses and heavy vehicles." },
       { property: "og:title", content: "Fuel Tracks Products" },
-      { property: "og:description", content: "AIS-140 GPS · Basic Trackers · Capacitive Fuel Sensors · Fleet Management & Asset Tracking Software." },
-      { property: "og:url", content: "https://fueltracks-tpl.lovable.app/products" },
+      { property: "og:description", content: "GPS devices · Capacitive fuel sensors · Fleet management software." },
+      { property: "og:url", content: "https://fuel-track-cosmos.lovable.app/products" },
     ],
-    links: [{ rel: "canonical", href: "https://fueltracks-tpl.lovable.app/products" }],
+    links: [{ rel: "canonical", href: "https://fuel-track-cosmos.lovable.app/products" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@graph": products.map((p) => ({
-            "@type": "Product",
-            name: p.name,
-            sku: p.sku,
-            brand: { "@type": "Brand", name: "Fuel Tracks" },
-            description: p.tagline,
-            category: p.category,
-          })),
+          "@graph": [
+            { "@type": "Product", name: "VLTD-AIS GPS Tracking Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "VLTD-AIS GPS Tracking Device" },
+            { "@type": "Product", name: "FT-CFS-1000 Capacitive Fuel Sensor", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.", category: "Fuel Level Sensor" },
+            { "@type": "Product", name: "FT-Cloud Suite Smart HD CCTV Security Camera", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.", category: "Smart HD CCTV Security Camera" },
+          ],
         }),
       },
     ],
@@ -38,17 +36,62 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-type Filter = "All" | Exclude<ProductCategory, "Software">;
-const FILTERS: Filter[] = ["All", "Devices", "Sensors"];
+const products = [
+  {
+    slug: "gps-tracking-device",
+    icon: Cpu,
+    image: fttplGpsDevice.url,
+    name: "VLTD-AIS GPS Tracking Device",
+    tag: "FT-GPS-Pro",
+    desc: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.",
+    cta: "Enquire Now",
+    specs: [
+      ["Network", "4G LTE + 2G fallback"],
+      ["GNSS", "GPS + GLONASS, 2.5 m accuracy"],
+      ["Battery", "1100 mAh internal backup"],
+      ["I/O", "4 digital + 2 analog inputs"],
+      ["Operating Temp", "−20°C to +70°C"],
+      ["Certification", "ARAI, IP65"],
+    ],
+  },
+  {
+    slug: "fuel-sensor",
+    icon: Droplet,
+    image: fuelSensorImage.url,
+    name: "Capacitive Fuel Sensor",
+    tag: "FT-CFS-1000",
+    desc: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.",
+    cta: "Download Spec",
+    specs: [
+      ["Sensor Type", "Capacitive Fuel Level Sensor"],
+      ["Accuracy", "±1–2% with idle-field condition"],
+      ["Resolution", "1 mm for regular tanks"],
+      ["Response", "<5 mins (500 samples/sec)"],
+      ["Output", "DC 0–5V / RS-232 / RS-485"],
+      ["Protection", "IP67, Aluminium casing"],
+      ["Lifetime", "30,000 hours"],
+    ],
+  },
+  {
+    slug: "fleet-software",
+    icon: Monitor,
+    image: fleetCameraImage.url,
+    name: "Smart HD CCTV Security Camera",
+    tag: "FT-Cloud Suite",
+    desc: "Monitor your property 24/7 with crystal-clear HD video and night vision. Get real-time alerts and remote access for enhanced security anytime, anywhere.",
+    cta: "Request Demo",
+    specs: [
+      ["Live Tracking", "Sub-10-second refresh"],
+      ["Fuel Reports", "Refill, drain & mileage events"],
+      ["Geo-fencing", "Polygon zones with alerts"],
+      ["Mobile App", "Native iOS & Android"],
+      ["Roles", "Admin, Manager, Driver, Parent"],
+      ["Exports", "CSV, PDF, scheduled email"],
+    ],
+  },
+];
 
 function ProductsPage() {
-  const [filter, setFilter] = useState<Filter>("All");
-  const catalog = useMemo(() => products.filter((p) => p.category !== "Software"), []);
-  const visible = useMemo(
-    () => (filter === "All" ? catalog : catalog.filter((p) => p.category === filter)),
-    [filter, catalog],
-  );
-
   return (
     <>
       <PageHeader title="Our Products" crumbs={[{ label: "Home", to: "/" }, { label: "Products" }]} />
@@ -58,40 +101,12 @@ function ProductsPage() {
           <Reveal className="text-center max-w-2xl mx-auto">
             <div className="text-xs font-bold tracking-[0.25em] text-primary">HARDWARE + SOFTWARE</div>
             <h2 className="mt-3 text-4xl md:text-5xl font-bold text-gradient">Everything you need, end to end.</h2>
-            <p className="mt-4 text-muted-foreground">
-              AIS-140 trackers, fuel sensors and a powerful cloud platform — built to run modern fleets.
-            </p>
+            <p className="mt-4 text-muted-foreground">Premium IoT hardware paired with a beautifully simple cloud platform.</p>
           </Reveal>
 
-          {/* Category filter chips */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
-            {FILTERS.map((f) => {
-              const active = f === filter;
-              const count = f === "All" ? catalog.length : catalog.filter((p) => p.category === f).length;
-              return (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setFilter(f)}
-                  className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 border ${
-                    active
-                      ? "bg-[var(--gradient-primary)] text-primary-foreground border-transparent shadow-glow scale-[1.02]"
-                      : "bg-white/70 backdrop-blur text-navy/80 border-navy/10 hover:border-primary/40 hover:text-primary"
-                  }`}
-                  aria-pressed={active}
-                >
-                  {f}
-                  <span className={`text-[10px] font-mono tracking-wider rounded-full px-1.5 py-0.5 ${active ? "bg-white/20" : "bg-navy/5"}`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visible.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.06}>
+          <div className="mt-14 grid lg:grid-cols-3 gap-6">
+            {products.map((p, i) => (
+              <Reveal key={p.name} delay={i * 0.08}>
                 <ProductCard p={p} />
               </Reveal>
             ))}
@@ -102,65 +117,56 @@ function ProductsPage() {
   );
 }
 
-function ProductCard({ p }: { p: Product }) {
+function ProductCard({ p }: { p: typeof products[number] }) {
   return (
     <div className="h-full flex flex-col group bg-white rounded-2xl border border-navy/[0.08] shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-      {/* Image */}
-      <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-[#F0F9FF] via-white to-[#E8F4FD] overflow-hidden">
+      {/* Product visual — light, clean background */}
+      <div className="relative aspect-square w-full max-w-[1055px] mx-auto -mx-6 -mt-6 mb-5 bg-gradient-to-br from-[#F0F9FF] via-white to-[#E8F4FD] overflow-hidden text-right">
         <div className="absolute inset-0 bg-[var(--gradient-glow)] opacity-30" />
         <div className="absolute inset-0 bg-grid opacity-[0.06]" />
-        <div className="absolute top-3 left-3 z-10">
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur border border-navy/10 px-2.5 py-1 text-[10px] font-mono tracking-[0.15em] uppercase text-navy/70">
-            {p.category}
-          </span>
-        </div>
-        <div className="relative h-full grid place-items-center p-6">
-          <motion.img
-            src={p.image}
-            alt={p.name}
-            loading="lazy"
-            decoding="async"
-            whileHover={{ scale: 1.06, rotate: 1 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className="max-h-[85%] max-w-[85%] object-contain drop-shadow-2xl"
-          />
+        <div className="relative h-full grid place-items-center p-6 bg-transparent">
+          {"image" in p && p.image ? (
+            <motion.img
+              src={p.image}
+              alt={p.name}
+              loading="lazy"
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="max-h-[80%] max-w-[80%] object-contain drop-shadow-2xl"
+            />
+          ) : (
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="size-24 rounded-3xl bg-[var(--gradient-primary)] grid place-items-center shadow-glow group-hover:shadow-glow"
+            >
+              <p.icon className="size-12 text-primary-foreground" />
+            </motion.div>
+          )}
         </div>
       </div>
 
-      {/* Body */}
-      <div className="px-6 py-5 flex flex-col flex-1">
-        <div className="text-[10px] font-mono tracking-[0.18em] text-primary uppercase">{p.sku}</div>
-        <h3 className="mt-1 font-display font-bold text-lg text-navy leading-tight">{p.name}</h3>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-3">{p.tagline}</p>
+      <div className="px-6 pb-6 flex flex-col flex-1">
+        <h3 className="font-display font-bold text-xl text-navy">{p.name}</h3>
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
 
-        {/* Key feature pills */}
-        <ul className="mt-4 flex flex-wrap gap-1.5">
-          {p.highlights.slice(0, 3).map((h) => (
-            <li
-              key={h}
-              className="inline-flex items-center gap-1 rounded-full bg-primary/8 text-primary/90 border border-primary/15 px-2.5 py-1 text-[11px] font-semibold"
-            >
-              <Check className="size-3" strokeWidth={3} />
-              {h}
-            </li>
-          ))}
-        </ul>
 
-        {/* CTAs */}
+
         <div className="mt-auto pt-5 flex gap-2">
-          <Link
-            to="/products/$slug"
-            params={{ slug: p.slug }}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform"
-          >
-            View Details <ArrowRight className="size-4" />
-          </Link>
           <a
             href={buildProductEnquiryUrl(p.name)}
             target="_blank"
             rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
+          >
+            <WhatsAppIcon className="size-4" /> Enquire Now <ArrowRight className="size-4" />
+          </a>
+          <a
+            href={buildProductEnquiryUrl(p.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-[#25D366] hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-colors"
             aria-label={`WhatsApp enquiry for ${p.name}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
           >
             <WhatsAppIcon className="size-5" />
           </a>
