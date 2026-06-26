@@ -89,6 +89,22 @@ const products = [
       ["Exports", "CSV, PDF, scheduled email"],
     ],
   },
+  {
+    slug: "v5-basic-gps",
+    icon: Cpu,
+    name: "V5 Basic GPS Device",
+    tag: "Compact everyday GPS tracker",
+    desc: "A compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes, and personal vehicles that need dependable live tracking without fleet complexity.",
+    cta: "Enquire Now",
+    specs: [
+      ["Form Factor", "Compact, plug-and-play"],
+      ["Network", "2G/4G connectivity"],
+      ["GNSS", "GPS with high accuracy"],
+      ["Use Case", "Cars, bikes, personal vehicles"],
+      ["Installation", "Easy DIY setup"],
+      ["Tracking", "Real-time live location"],
+    ],
+  },
 ];
 
 function ProductsPage() {
