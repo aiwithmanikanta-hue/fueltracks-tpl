@@ -122,7 +122,7 @@ function ProductsPage() {
             <p className="mt-4 text-muted-foreground">Premium IoT hardware paired with a beautifully simple cloud platform.</p>
           </Reveal>
 
-          <div className="mt-14 grid lg:grid-cols-3 gap-6">
+          <div className="mt-14 grid md:grid-cols-2 gap-8">
             {products.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <ProductCard p={p} />
