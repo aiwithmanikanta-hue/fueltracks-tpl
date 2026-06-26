@@ -93,6 +93,7 @@ const products = [
   {
     slug: "v5-basic-gps",
     icon: Cpu,
+    image: v5BasicGpsImage.url,
     name: "V5 Basic GPS Device",
     tag: "Compact everyday GPS tracker",
     desc: "A compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes, and personal vehicles that need dependable live tracking without fleet complexity.",
