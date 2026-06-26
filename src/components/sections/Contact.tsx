@@ -44,13 +44,18 @@ I would like to enquire about your services.
 Name: ${f.name}
 Phone Number: ${f.phone}
 Email: ${f.email || "—"}
+Company: ${f.company || "—"}
 Location: ${f.city || "—"}
 Product Interested In: ${f.product}
 
+Please share:
+• Product Details
+• Pricing
+• Installation Process
+• Demo Availability
+
 Message:
 ${f.message}
-
-Please contact me with more information.
 
 Thank you.`;
   return `https://wa.me/${COMPANY_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
