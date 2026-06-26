@@ -103,6 +103,7 @@ export function Contact() {
           name: form.name,
           phone: form.phone,
           email: form.email,
+          company: form.company,
           city: form.city,
           product: form.product,
           subject: form.product,
