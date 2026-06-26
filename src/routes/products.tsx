@@ -26,9 +26,9 @@ export const Route = createFileRoute("/products")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
-            { "@type": "Product", name: "VLTD-AIS GPS Tracking Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "VLTD-AIS GPS Tracking Device" },
-            { "@type": "Product", name: "FT-CFS-1000 Capacitive Fuel Sensor", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.", category: "Fuel Level Sensor" },
-            { "@type": "Product", name: "FT-Cloud Suite", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "A reliable, budget-friendly VLTD for essential real-time tracking, geofencing, and trip history — purpose-built for operators who want dependable visibility without the flagship price.", category: "FT-Cloud Suite" },
+            { "@type": "Product", name: "VLTD 4G Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Industrial-grade multi-constellation GPS+GLONASS device with 4G fallback, internal battery and tamper detection.", category: "GPS Tracking" },
+            { "@type": "Product", name: "Capacitive Fuel Sensor", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1mm resolution and tamper-proof aluminium casing.", category: "Fuel Level Sensor" },
+            { "@type": "Product", name: "VLTD 2G Device", brand: { "@type": "Brand", name: "Fuel Tracks" }, description: "A reliable, budget-friendly VLTD for essential real-time tracking, geofencing, and trip history — purpose-built for operators who want dependable visibility without the flagship price.", category: "GPS Tracking" },
           ],
         }),
       },
