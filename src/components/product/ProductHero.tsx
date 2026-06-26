@@ -135,19 +135,31 @@ export function ProductHero({ product }: { product: Product }) {
                 }}
               />
 
-              <motion.img
-                key={gallery[active]}
-                src={gallery[active]}
-                alt={`${product.name} — view ${active + 1}`}
-                width={1200}
-                height={1200}
-                loading="eager"
-                {...({ fetchpriority: "high" } as Record<string, string>)}
-                initial={{ opacity: 0, scale: 1.03 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative z-10 w-full h-full object-contain p-10 md:p-14 transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-              />
+              <button
+                type="button"
+                onClick={() => setZoomed(true)}
+                aria-label={`Zoom image: ${product.name}`}
+                className="absolute inset-0 z-10 cursor-zoom-in"
+              >
+                <motion.img
+                  key={gallery[active]}
+                  src={gallery[active]}
+                  alt={`${product.name} — view ${active + 1}`}
+                  width={1200}
+                  height={1200}
+                  loading="eager"
+                  {...({ fetchpriority: "high" } as Record<string, string>)}
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-full h-full object-contain p-10 md:p-14 transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                />
+              </button>
+
+              {/* zoom hint */}
+              <div className="absolute bottom-5 right-5 z-20 flex items-center gap-1.5 bg-white/90 backdrop-blur rounded-full px-3 py-1.5 text-[10px] font-semibold text-navy/80 border border-navy/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="size-3" /> Click to zoom
+              </div>
 
               {/* counter pill */}
               <div className="absolute top-5 left-5 z-20 bg-white/90 backdrop-blur rounded-full px-3 py-1 text-[10px] font-mono tracking-[0.15em] text-navy/70 uppercase border border-navy/10">
@@ -160,6 +172,7 @@ export function ProductHero({ product }: { product: Product }) {
                 In Stock
               </div>
             </div>
+
 
             {/* Thumbnails */}
             {gallery.length > 1 && (
