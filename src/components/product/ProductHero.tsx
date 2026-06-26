@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { MessageCircle, FileText, Calendar, Check, ShieldCheck, Headphones, Truck } from "lucide-react";
-import type { Product } from "@/data/products";
+import { motion, AnimatePresence } from "framer-motion";
+import { FileText, Calendar, Check, ShieldCheck, Headphones, Truck, Download, X, ZoomIn } from "lucide-react";
+import { brochureUrl, type Product } from "@/data/products";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 
 export function ProductHero({ product }: { product: Product }) {
   const gallery = product.images && product.images.length > 0 ? product.images : [product.image];
