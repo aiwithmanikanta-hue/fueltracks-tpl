@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
-const fleetCameraImage = { url: "/images/fleet-camera.png" };
+import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
