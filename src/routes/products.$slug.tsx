@@ -19,10 +19,22 @@ export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
     const product = getProduct(params.slug);
     if (!product) throw notFound();
-    return { product };
+    // Return only serializable fields. The full product (icons are React
+    // components / functions and are not serializable) is read directly
+    // from the local data module inside the component.
+    return {
+      meta: {
+        slug: product.slug,
+        name: product.name,
+        sku: product.sku,
+        tagline: product.tagline,
+        description: product.description,
+        image: product.image,
+      },
+    };
   },
   head: ({ loaderData }) => {
-    const p = loaderData?.product;
+    const p = loaderData?.meta;
     if (!p) return { meta: [{ title: "Product — Fuel Tracks" }] };
     const title = `${p.name} (${p.sku}) — Fuel Tracks`;
     const desc = p.tagline;
@@ -60,7 +72,9 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductDetailPage() {
-  const { product } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const product = getProduct(slug);
+  if (!product) return <ProductNotFound />;
   return (
     <>
       {/* Breadcrumbs */}
