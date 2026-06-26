@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { MessageCircle, FileText, Calendar, Check, ShieldCheck, Headphones, Truck } from "lucide-react";
-import type { Product } from "@/data/products";
+import { motion, AnimatePresence } from "framer-motion";
+import { FileText, Calendar, Check, ShieldCheck, Headphones, Truck, Download, X, ZoomIn } from "lucide-react";
+import { brochureUrl, type Product } from "@/data/products";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 
 export function ProductHero({ product }: { product: Product }) {
   const gallery = product.images && product.images.length > 0 ? product.images : [product.image];
   const [active, setActive] = useState(0);
+  const [zoomed, setZoomed] = useState(false);
+  const brochure = brochureUrl(product.slug);
+  const whatsappUrl = buildProductEnquiryUrl(product.name);
 
   return (
     <section className="relative pt-24 pb-16 md:pt-28 md:pb-24 overflow-hidden">
@@ -58,19 +63,41 @@ export function ProductHero({ product }: { product: Product }) {
             >
               <FileText className="size-4" /> Get Quote
             </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-6 py-3.5 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
             >
-              <Calendar className="size-4" /> Request Demo
-            </Link>
+              <WhatsAppIcon className="size-4" /> WhatsApp Enquiry
+            </a>
+            {brochure ? (
+              <a
+                href={brochure}
+                download
+                className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
+              >
+                <Download className="size-4" /> Download Brochure
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Brochure coming soon"
+                aria-label="Brochure coming soon"
+                className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white/40 backdrop-blur px-6 py-3.5 text-sm font-semibold text-navy/50 cursor-not-allowed"
+              >
+                <Download className="size-4" /> Brochure coming soon
+              </button>
+            )}
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white/60 backdrop-blur px-6 py-3.5 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-white transition-colors"
             >
-              <MessageCircle className="size-4" /> Contact Us
+              <Calendar className="size-4" /> Request Demo
             </Link>
           </div>
+
 
           {/* Trust strip */}
           <div className="mt-8 pt-6 border-t border-navy/10 grid grid-cols-3 gap-4 max-w-md">
@@ -108,19 +135,31 @@ export function ProductHero({ product }: { product: Product }) {
                 }}
               />
 
-              <motion.img
-                key={gallery[active]}
-                src={gallery[active]}
-                alt={`${product.name} — view ${active + 1}`}
-                width={1200}
-                height={1200}
-                loading="eager"
-                {...({ fetchpriority: "high" } as Record<string, string>)}
-                initial={{ opacity: 0, scale: 1.03 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative z-10 w-full h-full object-contain p-10 md:p-14 transition-transform duration-700 ease-out group-hover:scale-[1.08]"
-              />
+              <button
+                type="button"
+                onClick={() => setZoomed(true)}
+                aria-label={`Zoom image: ${product.name}`}
+                className="absolute inset-0 z-10 cursor-zoom-in"
+              >
+                <motion.img
+                  key={gallery[active]}
+                  src={gallery[active]}
+                  alt={`${product.name} — view ${active + 1}`}
+                  width={1200}
+                  height={1200}
+                  loading="eager"
+                  {...({ fetchpriority: "high" } as Record<string, string>)}
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-full h-full object-contain p-10 md:p-14 transition-transform duration-700 ease-out group-hover:scale-[1.08]"
+                />
+              </button>
+
+              {/* zoom hint */}
+              <div className="absolute bottom-5 right-5 z-20 flex items-center gap-1.5 bg-white/90 backdrop-blur rounded-full px-3 py-1.5 text-[10px] font-semibold text-navy/80 border border-navy/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="size-3" /> Click to zoom
+              </div>
 
               {/* counter pill */}
               <div className="absolute top-5 left-5 z-20 bg-white/90 backdrop-blur rounded-full px-3 py-1 text-[10px] font-mono tracking-[0.15em] text-navy/70 uppercase border border-navy/10">
@@ -133,6 +172,7 @@ export function ProductHero({ product }: { product: Product }) {
                 In Stock
               </div>
             </div>
+
 
             {/* Thumbnails */}
             {gallery.length > 1 && (
@@ -173,6 +213,43 @@ export function ProductHero({ product }: { product: Product }) {
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {zoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[120] grid place-items-center bg-navy/85 backdrop-blur-md p-4 md:p-10"
+            onClick={() => setZoomed(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${product.name} — zoomed image`}
+          >
+            <button
+              type="button"
+              onClick={() => setZoomed(false)}
+              aria-label="Close zoomed image"
+              className="absolute top-5 right-5 size-11 grid place-items-center rounded-full bg-white/95 text-navy shadow-lg hover:scale-105 transition-transform"
+            >
+              <X className="size-5" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              src={gallery[active]}
+              alt={`${product.name} — zoomed view`}
+              className="max-h-[88vh] max-w-[92vw] object-contain drop-shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
+

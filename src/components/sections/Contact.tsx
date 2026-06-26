@@ -10,11 +10,15 @@ import { COMPANY_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 type Status = "idle" | "submitting" | "sent" | "error";
 
 const PRODUCT_OPTIONS = [
-  "GPS Tracking Device",
-  "Fuel Sensor",
-  "AIS-140 Device",
-  "Fleet Management Software",
-  "School Bus Tracking",
+  "VLTD AIS-140 4G Device",
+  "VLTD AIS-140 2G Device",
+  "V5 Basic GPS Device",
+  "VLTD-AIS GPS Tracking Device",
+  "Capacitive Fuel Sensor",
+  "GPS Tracking Platform",
+  "Fleet Management Solutions",
+  "Asset Tracking Solutions",
+  "Smart HD CCTV Security Camera",
   "Other",
 ];
 
@@ -22,6 +26,7 @@ type FormState = {
   name: string;
   phone: string;
   email: string;
+  company: string;
   city: string;
   product: string;
   message: string;
@@ -29,7 +34,7 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const INITIAL: FormState = { name: "", phone: "", email: "", city: "", product: "", message: "" };
+const INITIAL: FormState = { name: "", phone: "", email: "", company: "", city: "", product: "", message: "" };
 
 function buildWhatsAppUrl(f: FormState) {
   const msg = `Hello Fuel Tracks Team,
@@ -39,13 +44,18 @@ I would like to enquire about your services.
 Name: ${f.name}
 Phone Number: ${f.phone}
 Email: ${f.email || "—"}
+Company: ${f.company || "—"}
 Location: ${f.city || "—"}
 Product Interested In: ${f.product}
 
+Please share:
+• Product Details
+• Pricing
+• Installation Process
+• Demo Availability
+
 Message:
 ${f.message}
-
-Please contact me with more information.
 
 Thank you.`;
   return `https://wa.me/${COMPANY_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -93,6 +103,7 @@ export function Contact() {
           name: form.name,
           phone: form.phone,
           email: form.email,
+          company: form.company,
           city: form.city,
           product: form.product,
           subject: form.product,
@@ -153,6 +164,13 @@ export function Contact() {
                     value={form.email} onChange={(v) => update("email", v)} error={errors.email}
                     placeholder="you@company.com"
                   />
+                  <Field
+                    label="Company Name" id="c-company" type="text"
+                    value={form.company} onChange={(v) => update("company", v)} error={errors.company}
+                    placeholder="Your company"
+                  />
+                </div>
+                <div>
                   <Field
                     label="City / Location" id="c-city" type="text"
                     value={form.city} onChange={(v) => update("city", v)} error={errors.city}
