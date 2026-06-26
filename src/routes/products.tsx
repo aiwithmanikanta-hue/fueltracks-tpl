@@ -67,7 +67,7 @@ function ProductsPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             {FILTERS.map((f) => {
               const active = f === filter;
-              const count = f === "All" ? products.length : products.filter((p) => p.category === f).length;
+              const count = f === "All" ? catalog.length : catalog.filter((p) => p.category === f).length;
               return (
                 <button
                   key={f}
