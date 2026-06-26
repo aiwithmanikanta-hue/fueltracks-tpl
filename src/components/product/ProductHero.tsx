@@ -59,7 +59,7 @@ export function ProductHero({ product }: { product: Product }) {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-6 py-3.5 text-sm font-semibold text-black shadow-glow hover:scale-[1.02] transition-transform"
             >
               <FileText className="size-4" /> Get Quote
             </Link>
