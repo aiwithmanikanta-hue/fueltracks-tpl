@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
-const fttplGpsDevice = { url: "/images/fttpl-gps-device.png" };
+import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
 const fuelSensorImage = { url: "/images/fuel-sensor.png" };
 const fleetCameraImage = { url: "/images/fleet-camera.png" };
 
