@@ -10,11 +10,15 @@ import { COMPANY_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 type Status = "idle" | "submitting" | "sent" | "error";
 
 const PRODUCT_OPTIONS = [
-  "GPS Tracking Device",
-  "Fuel Sensor",
-  "AIS-140 Device",
-  "Fleet Management Software",
-  "School Bus Tracking",
+  "VLTD AIS-140 4G Device",
+  "VLTD AIS-140 2G Device",
+  "V5 Basic GPS Device",
+  "VLTD-AIS GPS Tracking Device",
+  "Capacitive Fuel Sensor",
+  "GPS Tracking Platform",
+  "Fleet Management Solutions",
+  "Asset Tracking Solutions",
+  "Smart HD CCTV Security Camera",
   "Other",
 ];
 
@@ -22,6 +26,7 @@ type FormState = {
   name: string;
   phone: string;
   email: string;
+  company: string;
   city: string;
   product: string;
   message: string;
@@ -29,7 +34,7 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const INITIAL: FormState = { name: "", phone: "", email: "", city: "", product: "", message: "" };
+const INITIAL: FormState = { name: "", phone: "", email: "", company: "", city: "", product: "", message: "" };
 
 function buildWhatsAppUrl(f: FormState) {
   const msg = `Hello Fuel Tracks Team,
