@@ -11,8 +11,9 @@ import ais4gImg from "@/assets/products/ais-140-4g.jpg";
 import ais2gImg from "@/assets/products/ais-140-2g.jpg";
 import v5BasicImg from "@/assets/products/v5-basic-gps.jpg";
 import platformImg from "@/assets/products/platform-dashboard.jpg";
-const gpsImg1 = { url: "/images/gps-tracker-main.jpg" };
-const gpsImg2 = { url: "/images/gps-device-2.jpg" };
+import gpsImg1Asset from "@/assets/products/secure-experts-gps.png.asset.json";
+const gpsImg1 = { url: gpsImg1Asset.url };
+const gpsImg2 = { url: gpsImg1Asset.url };
 
 
 export type ProductCategory = "Devices" | "Sensors" | "Software";
