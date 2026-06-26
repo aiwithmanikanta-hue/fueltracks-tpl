@@ -9,6 +9,9 @@ import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 export function ProductHero({ product }: { product: Product }) {
   const gallery = product.images && product.images.length > 0 ? product.images : [product.image];
   const [active, setActive] = useState(0);
+  const [zoomed, setZoomed] = useState(false);
+  const brochure = brochureUrl(product.slug);
+  const whatsappUrl = buildProductEnquiryUrl(product.name);
 
   return (
     <section className="relative pt-24 pb-16 md:pt-28 md:pb-24 overflow-hidden">
