@@ -63,19 +63,41 @@ export function ProductHero({ product }: { product: Product }) {
             >
               <FileText className="size-4" /> Get Quote
             </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-6 py-3.5 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
             >
-              <Calendar className="size-4" /> Request Demo
-            </Link>
+              <WhatsAppIcon className="size-4" /> WhatsApp Enquiry
+            </a>
+            {brochure ? (
+              <a
+                href={brochure}
+                download
+                className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
+              >
+                <Download className="size-4" /> Download Brochure
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Brochure coming soon"
+                aria-label="Brochure coming soon"
+                className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white/40 backdrop-blur px-6 py-3.5 text-sm font-semibold text-navy/50 cursor-not-allowed"
+              >
+                <Download className="size-4" /> Brochure coming soon
+              </button>
+            )}
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white/60 backdrop-blur px-6 py-3.5 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-white transition-colors"
             >
-              <MessageCircle className="size-4" /> Contact Us
+              <Calendar className="size-4" /> Request Demo
             </Link>
           </div>
+
 
           {/* Trust strip */}
           <div className="mt-8 pt-6 border-t border-navy/10 grid grid-cols-3 gap-4 max-w-md">
