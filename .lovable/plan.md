@@ -1,66 +1,57 @@
+# Product Details Pages — 4 Dedicated Routes
 
-# Fuel Tracks Upgrade — Phase 1
+## Current state
 
-Scope locked to **global design polish + Homepage**. About, Services, Products, Product Details, Contact, Footer come in later phases. No theme change, no color change, no logo change, no content rewrites, no stats changes, no data migrations.
+- The detail route `/products/$slug` already exists with a full template: Hero, Overview, Features, Specs, How It Works, Dashboard Preview, Benefits, Industries, FAQ, Testimonials, CTA, Related Products, Contact. All sections read from `src/data/products.ts`.
+- Products page lists 4 cards but the data file only has 3 entries with **mismatched** content (e.g. card "VLTD 4G Device" loads data titled "VLTD-AIS GPS Tracking Device"; card "VLTD 2G Device" loads data titled "Smart HD CCTV Security Camera"). V5 Basic GPS has no detail data at all → broken page.
+- Product cards have no "View Details" button — only WhatsApp.
 
-## Guardrails (won't touch)
+## Changes
 
-- Brand colors, logo, brand name, existing palette in `src/styles.css`
-- Navigation structure and routes
-- WhatsApp integration, Supabase wiring, Contact form logic, Play Store link, social URLs
-- Products list / data source (stays hardcoded)
-- Stats numbers (kept as-is)
-- Existing copy unless a line is visibly broken
+### 1. Rewrite `src/data/products.ts`
 
-## What Phase 1 ships
+Replace the 3 entries with 4 entries matching the requested slugs and unique content per product:
 
-### 1. Global polish system (applies sitewide, not just homepage)
+| Slug | Name | Image |
+|---|---|---|
+| `vltd-4g-device` | VLTD 4G Device | `gps-device.png` |
+| `vltd-2g-device` | VLTD 2G Device | `fleet-camera.png` (current 2G card image) |
+| `v5-basic-gps-device` | V5 Basic GPS Device | `v5-basic-gps.png` |
+| `capacitive-fuel-sensor` | Capacitive Fuel Sensor | `fuel-sensor.png` |
 
-Adds reusable primitives so later phases inherit the look for free.
+For each product, author unique:
+- `tagline`, `description`, `highlights` (4 chips), `overview` (4 cards)
+- `features` (8 cards from the spec list per product in the brief)
+- `specs` (Device Type, Connectivity, Network, GPS Accuracy, Power Supply, Operating Voltage, Installation Type, Platform Support, Warranty)
+- `steps` (How It Works, 5 steps)
+- `benefits` (6 cards — Improve Fleet Visibility, Reduce Fuel Costs, Enhance Vehicle Security, etc.)
+- `industries` (8 — Logistics, School Buses, Transport, Construction, Mining, Fuel Tankers, Delivery, Corporate Fleets)
+- `faqs` (6 product-specific Q&A)
+- `related` → the other 3 slugs
+- `images` → reuse main image (single-item gallery for now; structure supports future uploads)
 
-- **Tokens added to `src/styles.css`** (no color changes): spacing rhythm, radius scale (`--radius-card: 18px`), elevation scale (`--shadow-sm/md/lg/glow`), motion tokens (`--ease-out-soft`, durations), glass surface token using existing brand color with alpha.
-- **Utilities** (`@utility`): `card-premium`, `glass-surface`, `hover-lift`, `reveal-on-scroll`, `gradient-border`. All built from existing brand tokens.
-- **Scroll reveal**: lightweight IntersectionObserver hook (`useReveal`) — no new heavy deps. Respects `prefers-reduced-motion`.
-- **Typography hierarchy pass**: tighten heading sizes/leading/tracking in `styles.css` only (same font families already loaded). Larger H1, better H2/H3 rhythm, improved body line-height.
-- **Button consistency audit**: verify shadcn Button variants render consistently; add one `variant="premium"` (gradient + soft shadow) for hero CTAs. Existing buttons untouched unless they're the hero CTA.
-- **Accessibility sweep on homepage only this phase**: focus-visible rings on interactive elements, `aria-label` on icon-only buttons in hero/nav, `h-dvh` swap if `h-screen` is used in hero.
+Keep `Product` type and shared `baseTestimonials` unchanged.
 
-### 2. Homepage redesign (`src/routes/index.tsx` + its section components)
+### 2. Update `src/routes/products.tsx`
 
-Preserves every existing section and its content. Visual upgrade only.
+- Rewrite the `products` array slugs/names to match new data: `vltd-4g-device`, `vltd-2g-device`, `v5-basic-gps-device`, `capacitive-fuel-sensor`.
+- Update JSON-LD product names accordingly.
+- Add a **View Details** button to `ProductCard` linking to `/products/$slug` via TanStack `<Link to="/products/$slug" params={{ slug: p.slug }}>` — placed alongside the existing WhatsApp buttons (primary action on the left).
 
-- **Hero**: larger headline, refined CTA stack, animated background (soft floating blurred brand-color orbs + subtle grid), keep existing dashboard/device imagery. Add scroll-down cue.
-- **Stats**: animated count-up on scroll into view, same numbers as today, premium card row with subtle dividers/glass.
-- **Product Showcase**: switch to premium card grid (rounded 18px, soft shadow, hover lift, image zoom on hover). WhatsApp enquiry button preserved.
-- **Industries**: modern icon cards (Logistics, Transportation, School Buses, Construction, Mining, Fuel Tankers) using lucide icons; only if section exists — otherwise added as a new section using current content tone.
-- **Why Choose Fuel Tracks**: feature cards w/ icon + title + 1-line description, gradient border on hover.
-- **CTA band**: full-width section with WhatsApp + Contact buttons (existing URLs).
-- **Scroll-reveal animations** wired into each section via the new hook.
+### 3. No changes needed elsewhere
 
-### 3. Performance hygiene (homepage only this phase)
+- All detail page section components (`ProductHero`, `ProductFeatures`, `ProductSpecs`, `ProductFAQ`, `RelatedProducts`, `ProductContact`, etc.) already consume the `Product` shape correctly.
+- `ProductSpecs` and `ProductFAQ` already use Radix Accordion in single-open mode (verified by file structure).
+- WhatsApp enquiry already dynamically inserts product name via `buildProductEnquiryUrl(product.name)`.
+- Route `/products/$slug` already handles 404 with a friendly Not Found component.
 
-- Lazy-load below-the-fold sections via dynamic import where worthwhile.
-- Add `loading="lazy"` + explicit width/height to non-hero images.
-- Preload hero image via route `head().links`.
+## Technical notes
 
-## Out of scope this phase (explicit)
+- All 4 slugs become valid because `getProduct(slug)` looks up by `slug` field.
+- No new routes are needed — TanStack's existing `/products/$slug` dynamic route serves every product.
+- Image gallery thumbnails appear only when `images.length > 1`; we can expand later by adding more URLs to each product's `images` array.
 
-About page, Services page, Products grid page, Product Details pages, Contact page redesign, Footer redesign, sitewide Lighthouse 95+ target, WebP/WebM conversion pipeline, code-splitting overhaul. These are Phase 2–4.
+## Out of scope
 
-## Files I expect to touch
-
-- `src/styles.css` — tokens, utilities, type scale
-- `src/routes/index.tsx` — section composition + reveal wiring
-- `src/components/sections/Hero.tsx`, `Stats.tsx`, `Products.tsx` (or equivalent), `Industries.tsx`, `WhyChoose.tsx`, `CTA.tsx` — visual upgrades only
-- `src/hooks/use-reveal.ts` — new
-- `src/components/ui/button.tsx` — add `premium` variant only if missing
-
-## Acceptance for Phase 1
-
-- Homepage looks visibly premium and modern; existing brand identity intact.
-- All existing homepage links/CTAs still work (WhatsApp, Contact, Play Store, social).
-- No regressions on mobile/tablet/desktop at 360 / 768 / 1280 / 1440.
-- No console errors; build passes.
-- Other routes still render (no global breakage from the new tokens/utilities).
-
-After you approve, I implement Phase 1 in one go and then we move to Phase 2 (About + Services).
+- New photography / additional gallery images per product (structure ready; assets can be uploaded later).
+- Backend changes — purely frontend/content.
