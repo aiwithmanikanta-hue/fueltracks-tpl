@@ -38,14 +38,15 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-type Filter = "All" | ProductCategory;
-const FILTERS: Filter[] = ["All", "Devices", "Sensors", "Software"];
+type Filter = "All" | Exclude<ProductCategory, "Software">;
+const FILTERS: Filter[] = ["All", "Devices", "Sensors"];
 
 function ProductsPage() {
   const [filter, setFilter] = useState<Filter>("All");
+  const catalog = useMemo(() => products.filter((p) => p.category !== "Software"), []);
   const visible = useMemo(
-    () => (filter === "All" ? products : products.filter((p) => p.category === filter)),
-    [filter],
+    () => (filter === "All" ? catalog : catalog.filter((p) => p.category === filter)),
+    [filter, catalog],
   );
 
   return (
@@ -66,7 +67,7 @@ function ProductsPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             {FILTERS.map((f) => {
               const active = f === filter;
-              const count = f === "All" ? products.length : products.filter((p) => p.category === f).length;
+              const count = f === "All" ? catalog.length : catalog.filter((p) => p.category === f).length;
               return (
                 <button
                   key={f}
