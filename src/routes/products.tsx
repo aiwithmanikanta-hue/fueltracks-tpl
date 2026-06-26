@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
-const fuelSensorImage = { url: "/images/fuel-sensor.png" };
+import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 const fleetCameraImage = { url: "/images/fleet-camera.png" };
 
 export const Route = createFileRoute("/products")({
