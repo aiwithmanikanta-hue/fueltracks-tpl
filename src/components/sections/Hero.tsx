@@ -22,7 +22,13 @@ export function Hero() {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
 
-      
+      {/* Floating brand orbs */}
+      <div aria-hidden className="pointer-events-none absolute -z-10 inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-24 size-[420px] rounded-full bg-primary/15 blur-3xl animate-orb" />
+        <div className="absolute top-40 -right-32 size-[480px] rounded-full bg-[#38BDF8]/20 blur-3xl animate-orb" style={{ animationDelay: "-6s" }} />
+        <div className="absolute bottom-0 left-1/3 size-[360px] rounded-full bg-accent/40 blur-3xl animate-orb" style={{ animationDelay: "-3s" }} />
+      </div>
+
       <div className="absolute inset-0 -z-10 bg-grid opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -63,7 +69,7 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-8 flex flex-wrap items-center gap-3"
             >
-              <Link to="/contact" className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:shadow-glow hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] active:brightness-95 transition-[transform,box-shadow,background-color] duration-200 ease-out">
+              <Link to="/contact" className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:bg-[#0284C7] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] transition-[transform,box-shadow,background-color] duration-200 ease-out">
                 Contact Us <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <a href="#features" className="inline-flex items-center gap-2 rounded-xl glass px-6 py-3.5 text-sm font-semibold hover:border-primary/40 transition-colors">

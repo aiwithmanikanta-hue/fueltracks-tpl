@@ -1,88 +1,66 @@
-# Contact Page Redesign + WhatsApp Lead Enquiry
 
-## What changes
+# Fuel Tracks Upgrade — Phase 1
 
-Rebuild the Contact form so a single "Send Enquiry on WhatsApp" click:
-1. Validates required fields,
-2. Saves the lead to Supabase (`contact_leads`),
-3. Opens WhatsApp (app on mobile, Web on desktop) with a pre-filled structured message to the company number `+91 73374 33351` (already in `src/lib/whatsapp.ts`).
+Scope locked to **global design polish + Homepage**. About, Services, Products, Product Details, Contact, Footer come in later phases. No theme change, no color change, no logo change, no content rewrites, no stats changes, no data migrations.
 
-## Form fields
+## Guardrails (won't touch)
 
-| Field | Required | Control |
-|---|---|---|
-| Full Name | ✓ | text |
-| Phone Number | ✓ | tel (10-digit India validation) |
-| Email | — | email |
-| City / Location | — | text |
-| Product Interested In | ✓ | select: GPS Tracking Device, Fuel Sensor, AIS-140 Device, Fleet Management Software, School Bus Tracking, Other |
-| Message / Requirement | ✓ | textarea |
+- Brand colors, logo, brand name, existing palette in `src/styles.css`
+- Navigation structure and routes
+- WhatsApp integration, Supabase wiring, Contact form logic, Play Store link, social URLs
+- Products list / data source (stays hardcoded)
+- Stats numbers (kept as-is)
+- Existing copy unless a line is visibly broken
 
-Inline error messages below each field; disable submit while sending.
+## What Phase 1 ships
 
-## WhatsApp message format
+### 1. Global polish system (applies sitewide, not just homepage)
 
-```
-Hello Fuel Tracks Team,
+Adds reusable primitives so later phases inherit the look for free.
 
-I would like to enquire about your services.
+- **Tokens added to `src/styles.css`** (no color changes): spacing rhythm, radius scale (`--radius-card: 18px`), elevation scale (`--shadow-sm/md/lg/glow`), motion tokens (`--ease-out-soft`, durations), glass surface token using existing brand color with alpha.
+- **Utilities** (`@utility`): `card-premium`, `glass-surface`, `hover-lift`, `reveal-on-scroll`, `gradient-border`. All built from existing brand tokens.
+- **Scroll reveal**: lightweight IntersectionObserver hook (`useReveal`) — no new heavy deps. Respects `prefers-reduced-motion`.
+- **Typography hierarchy pass**: tighten heading sizes/leading/tracking in `styles.css` only (same font families already loaded). Larger H1, better H2/H3 rhythm, improved body line-height.
+- **Button consistency audit**: verify shadcn Button variants render consistently; add one `variant="premium"` (gradient + soft shadow) for hero CTAs. Existing buttons untouched unless they're the hero CTA.
+- **Accessibility sweep on homepage only this phase**: focus-visible rings on interactive elements, `aria-label` on icon-only buttons in hero/nav, `h-dvh` swap if `h-screen` is used in hero.
 
-Name: {name}
-Phone Number: {phone}
-Email: {email or "—"}
-Location: {city or "—"}
-Product Interested In: {product}
+### 2. Homepage redesign (`src/routes/index.tsx` + its section components)
 
-Message:
-{message}
+Preserves every existing section and its content. Visual upgrade only.
 
-Please contact me with more information.
+- **Hero**: larger headline, refined CTA stack, animated background (soft floating blurred brand-color orbs + subtle grid), keep existing dashboard/device imagery. Add scroll-down cue.
+- **Stats**: animated count-up on scroll into view, same numbers as today, premium card row with subtle dividers/glass.
+- **Product Showcase**: switch to premium card grid (rounded 18px, soft shadow, hover lift, image zoom on hover). WhatsApp enquiry button preserved.
+- **Industries**: modern icon cards (Logistics, Transportation, School Buses, Construction, Mining, Fuel Tankers) using lucide icons; only if section exists — otherwise added as a new section using current content tone.
+- **Why Choose Fuel Tracks**: feature cards w/ icon + title + 1-line description, gradient border on hover.
+- **CTA band**: full-width section with WhatsApp + Contact buttons (existing URLs).
+- **Scroll-reveal animations** wired into each section via the new hook.
 
-Thank you.
-```
+### 3. Performance hygiene (homepage only this phase)
 
-Open `https://wa.me/917337433351?text=<encoded>` in a new tab. `wa.me` automatically routes to the app on mobile and WhatsApp Web on desktop.
+- Lazy-load below-the-fold sections via dynamic import where worthwhile.
+- Add `loading="lazy"` + explicit width/height to non-hero images.
+- Preload hero image via route `head().links`.
 
-## Supabase persistence
+## Out of scope this phase (explicit)
 
-Reuse the existing `submitContactLead` server function (`src/lib/contact.functions.ts`) and extend it to accept `city` and `product` (stored in existing `subject` field as `product` value, plus appended to `message`, OR added as new columns via migration).
+About page, Services page, Products grid page, Product Details pages, Contact page redesign, Footer redesign, sitewide Lighthouse 95+ target, WebP/WebM conversion pipeline, code-splitting overhaul. These are Phase 2–4.
 
-**Schema decision:** add two new nullable columns to `contact_leads`:
-- `city text`
-- `product text`
+## Files I expect to touch
 
-Migration runs before code changes that depend on the columns.
+- `src/styles.css` — tokens, utilities, type scale
+- `src/routes/index.tsx` — section composition + reveal wiring
+- `src/components/sections/Hero.tsx`, `Stats.tsx`, `Products.tsx` (or equivalent), `Industries.tsx`, `WhyChoose.tsx`, `CTA.tsx` — visual upgrades only
+- `src/hooks/use-reveal.ts` — new
+- `src/components/ui/button.tsx` — add `premium` variant only if missing
 
-The form calls the server fn first; on success it then opens the WhatsApp URL. If the DB write fails, still open WhatsApp (lead capture must not block enquiry) but log the error.
+## Acceptance for Phase 1
 
-## UI redesign
+- Homepage looks visibly premium and modern; existing brand identity intact.
+- All existing homepage links/CTAs still work (WhatsApp, Contact, Play Store, social).
+- No regressions on mobile/tablet/desktop at 360 / 768 / 1280 / 1440.
+- No console errors; build passes.
+- Other routes still render (no global breakage from the new tokens/utilities).
 
-Keep the existing two-column layout (form left, contact info + map right) and the glassmorphism look already in `Contact.tsx`. Refinements:
-- Larger, clearer labels with required-asterisks
-- Floating helper text under inputs
-- Replace the generic blue "Send Message" with a green WhatsApp-branded button (`WhatsAppIcon` already exists at `src/components/icons/WhatsAppIcon.tsx`): "Send Enquiry on WhatsApp"
-- Add a small secondary line: "Opens WhatsApp with your details pre-filled"
-- Tighter spacing, consistent border radius, focus rings already in design tokens
-
-No layout/section reordering; the contact-info card, map, and quick-action buttons on the right stay.
-
-## Files touched
-
-- `supabase/migrations/<timestamp>_contact_leads_add_city_product.sql` — add `city`, `product` columns
-- `src/lib/contact.functions.ts` — extend Zod schema + insert with new fields
-- `src/components/sections/Contact.tsx` — new fields, validation, WhatsApp submit handler, button restyle
-- (No changes to `Header`, `Footer`, routes, or other sections.)
-
-## Out of scope
-
-- No changes to other pages, product pages, or the floating WhatsApp button.
-- No auth changes.
-- No new routes.
-
-## Validation / done criteria
-
-- All 4 required fields show inline errors when empty.
-- Submit writes a row to `contact_leads` with all fields populated.
-- Submit opens `wa.me` URL in a new tab with the exact message template above, URL-encoded.
-- Works on mobile (deep-links to WhatsApp app) and desktop (WhatsApp Web).
-- `npm run build` passes with zero TS errors.
+After you approve, I implement Phase 1 in one go and then we move to Phase 2 (About + Services).

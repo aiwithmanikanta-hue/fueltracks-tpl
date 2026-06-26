@@ -11,6 +11,7 @@ import { DealerProgram } from "@/components/sections/DealerProgram";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
+import { CTABand } from "@/components/sections/CTABand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,6 +58,7 @@ function Index() {
       <DealerProgram />
       <Testimonials />
       <FAQ />
+      <CTABand />
       <Contact />
     </>
   );
