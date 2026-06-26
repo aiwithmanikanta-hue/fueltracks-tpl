@@ -8,6 +8,7 @@ import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
+import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
