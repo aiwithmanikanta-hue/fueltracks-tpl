@@ -8,6 +8,7 @@ import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
 import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
+import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -92,6 +93,7 @@ const products = [
   {
     slug: "v5-basic-gps",
     icon: Cpu,
+    image: v5BasicGpsImage.url,
     name: "V5 Basic GPS Device",
     tag: "Compact everyday GPS tracker",
     desc: "A compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes, and personal vehicles that need dependable live tracking without fleet complexity.",
