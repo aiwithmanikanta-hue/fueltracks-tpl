@@ -213,6 +213,43 @@ export function ProductHero({ product }: { product: Product }) {
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {zoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[120] grid place-items-center bg-navy/85 backdrop-blur-md p-4 md:p-10"
+            onClick={() => setZoomed(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${product.name} — zoomed image`}
+          >
+            <button
+              type="button"
+              onClick={() => setZoomed(false)}
+              aria-label="Close zoomed image"
+              className="absolute top-5 right-5 size-11 grid place-items-center rounded-full bg-white/95 text-navy shadow-lg hover:scale-105 transition-transform"
+            >
+              <X className="size-5" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              src={gallery[active]}
+              alt={`${product.name} — zoomed view`}
+              className="max-h-[88vh] max-w-[92vw] object-contain drop-shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
+
