@@ -165,6 +165,13 @@ export function Contact() {
                     placeholder="you@company.com"
                   />
                   <Field
+                    label="Company Name" id="c-company" type="text"
+                    value={form.company} onChange={(v) => update("company", v)} error={errors.company}
+                    placeholder="Your company"
+                  />
+                </div>
+                <div>
+                  <Field
                     label="City / Location" id="c-city" type="text"
                     value={form.city} onChange={(v) => update("city", v)} error={errors.city}
                     placeholder="Hyderabad"
