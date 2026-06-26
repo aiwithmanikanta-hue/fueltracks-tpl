@@ -22,7 +22,13 @@ export function Hero() {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
 
-      
+      {/* Floating brand orbs */}
+      <div aria-hidden className="pointer-events-none absolute -z-10 inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-24 size-[420px] rounded-full bg-primary/15 blur-3xl animate-orb" />
+        <div className="absolute top-40 -right-32 size-[480px] rounded-full bg-[#38BDF8]/20 blur-3xl animate-orb" style={{ animationDelay: "-6s" }} />
+        <div className="absolute bottom-0 left-1/3 size-[360px] rounded-full bg-accent/40 blur-3xl animate-orb" style={{ animationDelay: "-3s" }} />
+      </div>
+
       <div className="absolute inset-0 -z-10 bg-grid opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       <div className="mx-auto max-w-7xl px-4 md:px-6">
