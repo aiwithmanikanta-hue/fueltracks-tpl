@@ -38,14 +38,15 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-type Filter = "All" | ProductCategory;
-const FILTERS: Filter[] = ["All", "Devices", "Sensors", "Software"];
+type Filter = "All" | Exclude<ProductCategory, "Software">;
+const FILTERS: Filter[] = ["All", "Devices", "Sensors"];
 
 function ProductsPage() {
   const [filter, setFilter] = useState<Filter>("All");
+  const catalog = useMemo(() => products.filter((p) => p.category !== "Software"), []);
   const visible = useMemo(
-    () => (filter === "All" ? products : products.filter((p) => p.category === filter)),
-    [filter],
+    () => (filter === "All" ? catalog : catalog.filter((p) => p.category === filter)),
+    [filter, catalog],
   );
 
   return (
