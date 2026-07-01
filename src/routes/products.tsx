@@ -138,33 +138,31 @@ function ProductCard({ p }: { p: typeof products[number] }) {
 
 
 
-        <div className="mt-auto pt-5 flex flex-col gap-2">
+        <div className="mt-auto pt-5 flex gap-2">
           <Link
             to="/products/$slug"
             params={{ slug: p.slug }}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.02] transition-transform"
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-black hover:bg-black/85 px-4 py-3 text-sm font-semibold text-white shadow-card hover:scale-[1.02] transition-transform"
           >
             View Details <ArrowRight className="size-4" />
           </Link>
-          <div className="flex gap-2">
-            <a
-              href={buildProductEnquiryUrl(p.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
-            >
-              <WhatsAppIcon className="size-4" /> Enquire Now
-            </a>
-            <a
-              href={buildProductEnquiryUrl(p.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-[#25D366] hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-colors"
-              aria-label={`WhatsApp enquiry for ${p.name}`}
-            >
-              <WhatsAppIcon className="size-5" />
-            </a>
-          </div>
+          <a
+            href={buildProductEnquiryUrl(p.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-4 py-3 text-sm font-semibold text-white shadow-card hover:scale-[1.02] transition-transform"
+          >
+            <WhatsAppIcon className="size-4" /> Enquire Now
+          </a>
+          <a
+            href={buildProductEnquiryUrl(p.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-navy/10 px-4 py-3 text-sm font-semibold text-[#25D366] hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-colors"
+            aria-label={`WhatsApp enquiry for ${p.name}`}
+          >
+            <WhatsAppIcon className="size-5" />
+          </a>
         </div>
       </div>
     </div>
