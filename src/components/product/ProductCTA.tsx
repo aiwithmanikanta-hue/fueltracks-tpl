@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Calendar, FileText, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { COMPANY_WHATSAPP_NUMBER, buildProductEnquiryUrl } from "@/lib/whatsapp";
+import { COMPANY_WHATSAPP_NUMBER } from "@/lib/whatsapp";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function ProductCTA() {
@@ -56,7 +56,7 @@ export function ProductCTA() {
                   <Phone className="size-4" /> Contact Us
                 </Link>
                 <a
-                  href={`https://wa.me/${COMPANY_WHATSAPP_NUMBER}?text=${encodeURIComponent(buildProductEnquiryUrl("Fuel Tracks"))}`.replace(/&text=.*$/, "")}
+                  href={`https://wa.me/${COMPANY_WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-6 py-3.5 text-sm font-semibold text-white transition-colors"
