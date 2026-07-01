@@ -10,7 +10,7 @@ import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
 import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
 import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — GPS, Fuel Sensors & Software | Fuel Tracks" },
