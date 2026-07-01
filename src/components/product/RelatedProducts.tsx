@@ -24,16 +24,15 @@ export function RelatedProducts({ slugs }: { slugs: string[] }) {
           {items.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08}>
               <div className="group h-full flex flex-col card-premium overflow-hidden">
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-white via-secondary to-accent overflow-hidden">
+                <div className="relative aspect-square bg-gradient-to-br from-white via-secondary to-accent overflow-hidden border-b border-border">
                   <div className="absolute inset-0 bg-grid opacity-[0.06]" />
-                  <div className="relative h-full grid place-items-center p-6">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      loading="lazy"
-                      className="max-h-[90%] max-w-[90%] object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-contain p-8 drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                  />
+
                   <div className="absolute top-4 left-4 text-[10px] font-semibold tracking-wider text-primary uppercase glass rounded-full px-2.5 py-1">
                     {p.sku}
                   </div>
