@@ -15,7 +15,6 @@ import { ProductCTA } from "@/components/product/ProductCTA";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 import { ProductContact } from "@/components/product/ProductContact";
 import { ProductCompare } from "@/components/product/ProductCompare";
-import { ProductDetailSkeleton } from "@/components/product/ProductDetailSkeleton";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
