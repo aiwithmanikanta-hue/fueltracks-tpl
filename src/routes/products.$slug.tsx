@@ -16,10 +16,11 @@ export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
     const product = getProduct(params.slug);
     if (!product) throw notFound();
-    return { product };
+    // Return only serializable data; icons on Product are React components.
+    return { slug: product.slug, name: product.name, sku: product.sku, tagline: product.tagline, description: product.description, image: product.image };
   },
   head: ({ loaderData }) => {
-    const p = loaderData?.product;
+    const p = loaderData;
     if (!p) return { meta: [{ title: "Product — Fuel Tracks" }] };
     const title = `${p.name} (${p.sku}) — Fuel Tracks`;
     const desc = p.tagline;
@@ -57,7 +58,9 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductDetailPage() {
-  const { product } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const product = getProduct(slug);
+  if (!product) return null;
   return (
     <>
       <ProductHero product={product} />
