@@ -1,57 +1,86 @@
-# Product Details Pages — 4 Dedicated Routes
+# Product Details — Fix & Redesign Plan
 
-## Current state
+## 1. Diagnose the "View Details doesn't load" report
 
-- The detail route `/products/$slug` already exists with a full template: Hero, Overview, Features, Specs, How It Works, Dashboard Preview, Benefits, Industries, FAQ, Testimonials, CTA, Related Products, Contact. All sections read from `src/data/products.ts`.
-- Products page lists 4 cards but the data file only has 3 entries with **mismatched** content (e.g. card "VLTD 4G Device" loads data titled "VLTD-AIS GPS Tracking Device"; card "VLTD 2G Device" loads data titled "Smart HD CCTV Security Camera"). V5 Basic GPS has no detail data at all → broken page.
-- Product cards have no "View Details" button — only WhatsApp.
+The current route in the preview is `/products/vltd-4g-device`, which means routing already works. The only console signal is a benign framer-motion SSR hydration warning (`opacity: 0` vs `"0"`), not a fetch or route failure.
 
-## Changes
+**Action:** Before redesigning, I'll do a full audit:
+- Confirm all 4 slugs (`vltd-4g-device`, `vltd-2g-device`, `v5-basic-gps-device`, `capacitive-fuel-sensor`) resolve to real `Product` entries in `src/data/products.ts`.
+- Confirm `getProduct(slug)` returns the correct object and `throw notFound()` fires cleanly for bad slugs.
+- Fix the hydration warning by moving framer-motion `initial`/`animate` off SSR-critical headings (or wrapping in a client-only `Reveal`), so the page paints without React warnings on refresh.
 
-### 1. Rewrite `src/data/products.ts`
+If any product page is genuinely blank for a user, it is almost certainly this hydration issue or a stale route cache — the fix above resolves both.
 
-Replace the 3 entries with 4 entries matching the requested slugs and unique content per product:
+## 2. Central product data — already in place
 
-| Slug | Name | Image |
-|---|---|---|
-| `vltd-4g-device` | VLTD 4G Device | `gps-device.png` |
-| `vltd-2g-device` | VLTD 2G Device | `fleet-camera.png` (current 2G card image) |
-| `v5-basic-gps-device` | V5 Basic GPS Device | `v5-basic-gps.png` |
-| `capacitive-fuel-sensor` | Capacitive Fuel Sensor | `fuel-sensor.png` |
+`src/data/products.ts` is already the single source of truth (used by `/products` grid, `/products/$slug` detail page, and `RelatedProducts`). No new database needed. I will:
+- Add missing optional fields per product: `gallery: string[]`, `brochureUrl?: string`, `whatsappMessage?: string` (falls back to the existing `buildProductEnquiryUrl`).
+- Keep the existing `Product` shape backward compatible.
 
-For each product, author unique:
-- `tagline`, `description`, `highlights` (4 chips), `overview` (4 cards)
-- `features` (8 cards from the spec list per product in the brief)
-- `specs` (Device Type, Connectivity, Network, GPS Accuracy, Power Supply, Operating Voltage, Installation Type, Platform Support, Warranty)
-- `steps` (How It Works, 5 steps)
-- `benefits` (6 cards — Improve Fleet Visibility, Reduce Fuel Costs, Enhance Vehicle Security, etc.)
-- `industries` (8 — Logistics, School Buses, Transport, Construction, Mining, Fuel Tankers, Delivery, Corporate Fleets)
-- `faqs` (6 product-specific Q&A)
-- `related` → the other 3 slugs
-- `images` → reuse main image (single-item gallery for now; structure supports future uploads)
+## 3. Redesign the Product Details page
 
-Keep `Product` type and shared `baseTestimonials` unchanged.
+Keep Fuel Tracks branding, palette, animations, and the products card exactly as they are. Only `/products/$slug` and its child components change.
 
-### 2. Update `src/routes/products.tsx`
+New page structure (top to bottom):
 
-- Rewrite the `products` array slugs/names to match new data: `vltd-4g-device`, `vltd-2g-device`, `v5-basic-gps-device`, `capacitive-fuel-sensor`.
-- Update JSON-LD product names accordingly.
-- Add a **View Details** button to `ProductCard` linking to `/products/$slug` via TanStack `<Link to="/products/$slug" params={{ slug: p.slug }}>` — placed alongside the existing WhatsApp buttons (primary action on the left).
+```text
+[ Breadcrumbs ]
+┌─────────────────────────┬──────────────────────┐
+│  Gallery                │  Product Hero        │
+│  - Large image + zoom   │  - Name, SKU chip    │
+│  - Thumbnail strip      │  - Tagline           │
+│  - Prev/Next            │  - Highlight pills   │
+│                         │  - Get Quote         │
+│                         │  - WhatsApp Enquiry  │
+│                         │  - Download Brochure │
+└─────────────────────────┴──────────────────────┘
+[ Overview: 4 cards — What / How / Why / Who ]
+[ Key Features — existing card grid ]
+[ Technical Specifications — accordion, single-open ]
+[ How It Works — existing steps ]
+[ Applications / Industries ]
+[ Benefits ]
+[ FAQs — accordion, single-open ]
+[ Related Products ]
+[ Contact CTA — WhatsApp · Call · Request Demo ]
+```
 
-### 3. No changes needed elsewhere
+Components to add / update (no changes to Header, Footer, Hero page, or `ProductCard`):
+- `ProductHero.tsx` — split into left `ProductGallery` (new) + right `ProductHeroInfo`. Adds Download Brochure button next to existing Get Quote / WhatsApp.
+- `ProductGallery.tsx` (new) — main image with hover-zoom, thumbnail strip, keyboard/arrow nav, responsive stack on mobile.
+- `ProductSpecs.tsx` / `ProductFAQ.tsx` — already single-open Radix accordions; verify `type="single" collapsible`.
+- `ProductDetailSkeleton.tsx` (new) — skeleton shown via route `pendingComponent` so users never see a blank frame on slow networks.
 
-- All detail page section components (`ProductHero`, `ProductFeatures`, `ProductSpecs`, `ProductFAQ`, `RelatedProducts`, `ProductContact`, etc.) already consume the `Product` shape correctly.
-- `ProductSpecs` and `ProductFAQ` already use Radix Accordion in single-open mode (verified by file structure).
-- WhatsApp enquiry already dynamically inserts product name via `buildProductEnquiryUrl(product.name)`.
-- Route `/products/$slug` already handles 404 with a friendly Not Found component.
+## 4. Loading + error UX
 
-## Technical notes
+- Add `pendingMs: 100`, `pendingComponent: ProductDetailSkeleton` on the `/products/$slug` route.
+- Keep existing `notFoundComponent` (Product Not Found with suggested slugs) and `errorComponent` (retry via `router.invalidate()`).
 
-- All 4 slugs become valid because `getProduct(slug)` looks up by `slug` field.
-- No new routes are needed — TanStack's existing `/products/$slug` dynamic route serves every product.
-- Image gallery thumbnails appear only when `images.length > 1`; we can expand later by adding more URLs to each product's `images` array.
+## 5. Responsive & performance
 
-## Out of scope
+- Two-column hero collapses to single column at `md:`.
+- All images use `loading="lazy"` (hero uses `fetchpriority="high"`) and `decoding="async"`.
+- Gallery thumbnails preloaded; main image swap is instant.
+- No new dependencies.
 
-- New photography / additional gallery images per product (structure ready; assets can be uploaded later).
-- Backend changes — purely frontend/content.
+## 6. Final QA checklist
+
+For each of the 4 products I'll verify: View Details navigates, correct data renders, gallery works, specs accordion opens one-at-a-time, FAQs same, WhatsApp message contains the correct product name, related products link out, refresh works, back button works, no console errors.
+
+## Out of scope (explicitly untouched)
+
+- Website design tokens, colors, gradients in `src/styles.css`
+- Fuel Tracks branding, logo, typography
+- Existing framer-motion `Reveal` animations
+- `ProductCard` layout on `/products` (already finalized in your last edit — black View Details + green Enquire side-by-side stays)
+
+## Files to change
+
+- `src/data/products.ts` — add `gallery`, `brochureUrl`, optional `whatsappMessage`
+- `src/routes/products.$slug.tsx` — add `pendingComponent`, wire skeleton
+- `src/components/product/ProductHero.tsx` — split into gallery + info, add brochure button
+- `src/components/product/ProductGallery.tsx` — NEW
+- `src/components/product/ProductDetailSkeleton.tsx` — NEW
+- `src/components/product/ProductSpecs.tsx` — confirm single-open accordion
+- `src/components/product/ProductFAQ.tsx` — confirm single-open accordion
+- `src/components/product/ProductContact.tsx` — add Call + Request Demo alongside WhatsApp
