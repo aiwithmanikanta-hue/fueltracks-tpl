@@ -56,6 +56,8 @@ export const Route = createFileRoute("/products/$slug")({
     };
   },
   component: ProductDetailPage,
+  pendingComponent: ProductDetailSkeleton,
+  pendingMs: 100,
   notFoundComponent: ProductNotFound,
   errorComponent: ProductError,
 });
