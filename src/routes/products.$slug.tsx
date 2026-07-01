@@ -14,6 +14,7 @@ import { ProductTestimonials } from "@/components/product/ProductTestimonials";
 import { ProductCTA } from "@/components/product/ProductCTA";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 import { ProductContact } from "@/components/product/ProductContact";
+import { ProductDetailSkeleton } from "@/components/product/ProductDetailSkeleton";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
@@ -55,6 +56,8 @@ export const Route = createFileRoute("/products/$slug")({
     };
   },
   component: ProductDetailPage,
+  pendingComponent: ProductDetailSkeleton,
+  pendingMs: 100,
   notFoundComponent: ProductNotFound,
   errorComponent: ProductError,
 });

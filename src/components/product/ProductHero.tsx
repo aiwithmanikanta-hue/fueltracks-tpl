@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MessageCircle, FileText, Calendar, Check, ShieldCheck, Headphones, Truck } from "lucide-react";
+import { FileText, Calendar, Check, ShieldCheck, Headphones, Truck, Download } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { buildProductEnquiryUrl } from "@/lib/whatsapp";
 import type { Product } from "@/data/products";
 
 export function ProductHero({ product }: { product: Product }) {
@@ -58,18 +60,26 @@ export function ProductHero({ product }: { product: Product }) {
             >
               <FileText className="size-4" /> Get Quote
             </Link>
+            <a
+              href={buildProductEnquiryUrl(product.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1ebe57] px-6 py-3.5 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
+            >
+              <WhatsAppIcon className="size-4" /> WhatsApp Enquiry
+            </a>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl bg-foreground px-6 py-3.5 text-sm font-semibold text-background hover:bg-foreground/90 transition-colors"
             >
               <Calendar className="size-4" /> Request Demo
             </Link>
-            <Link
-              to="/contact"
+            <a
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white/60 backdrop-blur px-6 py-3.5 text-sm font-semibold text-navy hover:border-primary/40 hover:bg-white transition-colors"
             >
-              <MessageCircle className="size-4" /> Contact Us
-            </Link>
+              <Download className="size-4" /> Download Brochure
+            </a>
           </div>
 
           {/* Trust strip */}
