@@ -28,22 +28,22 @@ export function ProductStickyNav() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-navy/10">
+    <div className="sticky top-0 z-40 glass-strong border-b border-border">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-center gap-1 overflow-x-auto no-scrollbar h-14">
           {sections.map((s) => (
             <a
               key={s.id}
               href={`#${s.id}`}
-              className={`relative shrink-0 h-full inline-flex items-center px-4 text-[11px] font-bold uppercase tracking-[0.2em] transition-colors ${
+              className={`relative shrink-0 h-full inline-flex items-center px-4 text-xs font-semibold tracking-wide transition-colors ${
                 active === s.id
                   ? "text-primary"
-                  : "text-navy/50 hover:text-navy"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {s.label}
               {active === s.id && (
-                <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-primary" />
+                <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-primary" />
               )}
             </a>
           ))}

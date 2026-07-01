@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Check, Minus } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { products, type Product } from "@/data/products";
 
 type Row = { label: string; values: Record<string, string | boolean> };
@@ -49,13 +50,13 @@ function Cell({ v, active }: { v: string | boolean; active: boolean }) {
         <Check className="size-4" strokeWidth={3} />
       </span>
     ) : (
-      <span className="inline-flex size-7 rounded-full items-center justify-center bg-white/5 text-white/25">
+      <span className="inline-flex size-7 rounded-full items-center justify-center bg-muted text-muted-foreground/50">
         <Minus className="size-4" />
       </span>
     );
   }
   return (
-    <span className={`text-sm ${active ? "text-white font-semibold" : "text-white/70"} font-mono`}>
+    <span className={`text-sm ${active ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
       {v}
     </span>
   );
@@ -65,33 +66,21 @@ export function ProductCompare({ product }: { product: Product }) {
   const cols = [product, ...products.filter((p) => p.slug !== product.slug)];
 
   return (
-    <section id="compare" className="relative py-24 bg-navy text-white overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.1] pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(rgba(14,165,233,0.7) 0.5px, transparent 0.5px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
+    <section id="compare" className="relative py-24 overflow-hidden">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-background/80" />
       <div className="relative mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <div className="text-[10px] font-mono tracking-[0.22em] uppercase text-primary font-bold">
-            06 · Compare
-          </div>
-          <h2 className="mt-4 text-3xl md:text-4xl font-display font-bold leading-tight tracking-tight">
-            How it stacks up across the range.
-          </h2>
-          <p className="mt-4 text-white/60 font-light">
-            {product.name} shown against every other Fuel Tracks product, side by side.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Compare"
+          title="How it stacks up across the range."
+          description={`${product.name} shown against every other Fuel Tracks product, side by side.`}
+        />
 
         <Reveal className="mt-12">
-          <div className="overflow-x-auto rounded-md border border-white/10 bg-white/[0.02]">
+          <div className="overflow-x-auto card-premium">
             <table className="w-full min-w-[820px] text-left">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="p-5 text-[10px] font-mono tracking-[0.22em] text-white/40 uppercase w-56">
+                <tr className="border-b border-border">
+                  <th className="p-5 text-xs font-semibold tracking-wider text-muted-foreground uppercase w-56">
                     Feature
                   </th>
                   {cols.map((p) => {
@@ -99,28 +88,28 @@ export function ProductCompare({ product }: { product: Product }) {
                     return (
                       <th
                         key={p.slug}
-                        className={`p-5 align-bottom ${active ? "bg-primary/10 border-x border-primary/30" : ""}`}
+                        className={`p-5 align-bottom ${active ? "bg-primary/5" : ""}`}
                       >
                         <div className="flex flex-col gap-1.5">
                           {active ? (
-                            <span className="inline-flex w-fit rounded-sm bg-primary text-primary-foreground text-[9px] font-mono tracking-[0.2em] uppercase px-2 py-0.5">
+                            <span className="inline-flex w-fit rounded-full bg-primary text-primary-foreground text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5">
                               Current
                             </span>
                           ) : (
-                            <span className="inline-flex w-fit text-[9px] font-mono tracking-[0.2em] uppercase text-white/40 px-2 py-0.5">
+                            <span className="inline-flex w-fit text-[10px] font-semibold tracking-wider uppercase text-transparent px-2 py-0.5">
                               &nbsp;
                             </span>
                           )}
                           <Link
                             to="/products/$slug"
                             params={{ slug: p.slug }}
-                            className={`text-sm font-display font-bold leading-tight hover:text-primary transition-colors ${
-                              active ? "text-primary" : "text-white"
-                            }`}
+                            className={`text-sm font-semibold leading-snug hover:text-primary transition-colors ${active ? "text-foreground" : "text-foreground/80"}`}
                           >
                             {p.name}
                           </Link>
-                          <span className="text-[10px] font-mono text-white/40">{p.sku}</span>
+                          <span className="text-[10px] font-semibold tracking-wider uppercase text-muted-foreground">
+                            {p.sku}
+                          </span>
                         </div>
                       </th>
                     );
@@ -128,17 +117,17 @@ export function ProductCompare({ product }: { product: Product }) {
                 </tr>
               </thead>
               <tbody>
-                {matrix.map((row, i) => (
-                  <tr key={row.label} className={i % 2 === 0 ? "" : "bg-white/[0.02]"}>
-                    <td className="p-5 text-sm font-semibold text-white/90">{row.label}</td>
+                {matrix.map((row, ri) => (
+                  <tr key={row.label} className={ri < matrix.length - 1 ? "border-b border-border" : ""}>
+                    <td className="p-5 text-sm font-semibold text-foreground">
+                      {row.label}
+                    </td>
                     {cols.map((p) => {
                       const active = p.slug === product.slug;
+                      const v = row.values[p.slug];
                       return (
-                        <td
-                          key={p.slug}
-                          className={`p-5 ${active ? "bg-primary/10 border-x border-primary/30" : ""}`}
-                        >
-                          <Cell v={row.values[p.slug]} active={active} />
+                        <td key={p.slug} className={`p-5 ${active ? "bg-primary/5" : ""}`}>
+                          <Cell v={v} active={active} />
                         </td>
                       );
                     })}
