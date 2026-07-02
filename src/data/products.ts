@@ -79,8 +79,8 @@ export const products: Product[] = [
     description:
       "The VLTD 4G Device is a flagship AIS-140 certified vehicle location tracking unit built for commercial fleets that demand reliability, speed and compliance. Powered by 4G LTE with 2G fallback, it streams real-time GPS, driver behaviour and SOS events to your dashboard so you always know where every vehicle is, how it's being driven, and whether the driver needs help.",
     highlights: ["AIS-140 Certified", "4G LTE", "SOS Support", "Driver Behaviour"],
-    image: gpsDeviceImage.url,
-    images: [gpsDeviceImage.url],
+    image: gpsDeviceImage,
+    images: [gpsDeviceImage],
     overview: [
       { icon: Shield, title: "What it does", desc: "Streams AIS-140 compliant GPS, SOS and driver telemetry over a 4G LTE network." },
       { icon: Activity, title: "How it helps", desc: "Live tracking, geo-fencing and harsh-driving alerts keep every trip under control." },
@@ -145,8 +145,8 @@ export const products: Product[] = [
     description:
       "The VLTD 2G Device is a dependable, cost-effective vehicle location tracking unit purpose-built for operators who need essential real-time tracking, geo-fencing and trip history without the flagship price tag. Powered by India's widely-available 2G network, it delivers consistent uptime in cities and remote routes alike — perfect for trucks, taxis, school transport and small fleets.",
     highlights: ["AIS-140 Ready", "2G Network", "Live Tracking", "Geo-Fencing"],
-    image: fleetCameraImage.url,
-    images: [fleetCameraImage.url],
+    image: fleetCameraImage,
+    images: [fleetCameraImage],
     overview: [
       { icon: Shield, title: "What it does", desc: "Streams real-time GPS, route history and speed data over the 2G network." },
       { icon: DollarSign, title: "How it helps", desc: "Delivers essential fleet visibility at a fraction of the cost of premium trackers." },
@@ -211,8 +211,8 @@ export const products: Product[] = [
     description:
       "The V5 Basic GPS Device is a compact, plug-and-play GPS tracker designed for everyday vehicle security. Perfect for personal cars, two-wheelers, delivery vehicles and small commercial fleets, it delivers dependable live tracking, route playback and mobile alerts without the complexity (or cost) of enterprise fleet platforms.",
     highlights: ["Compact Design", "Easy Install", "Live Tracking", "Mobile App"],
-    image: v5BasicGpsImage.url,
-    images: [v5BasicGpsImage.url],
+    image: v5BasicGpsImage,
+    images: [v5BasicGpsImage],
     overview: [
       { icon: Cpu, title: "What it does", desc: "Streams live GPS location and trip data from any vehicle to your phone." },
       { icon: Shield, title: "How it helps", desc: "Protects personal vehicles against theft and unauthorised use." },
@@ -277,8 +277,8 @@ export const products: Product[] = [
     description:
       "The Capacitive Fuel Sensor is a premium fuel level monitoring probe engineered for trucks, buses, tankers and heavy equipment. With ±1–2% accuracy, 1 mm resolution and an IP67-sealed aluminium body, it detects every refill, drain and theft event the moment it happens — and streams it directly to your fleet dashboard alongside GPS data.",
     highlights: ["±1–2% accuracy", "Theft Detection", "1 mm resolution", "IP67 sealed"],
-    image: fuelSensorImage.url,
-    images: [fuelSensorImage.url],
+    image: fuelSensorImage,
+    images: [fuelSensorImage],
     overview: [
       { icon: Fuel, title: "What it does", desc: "Continuously measures fuel level inside the tank using capacitive sensing." },
       { icon: Shield, title: "How it helps", desc: "Catches every drain, refill and tamper event in real time." },
