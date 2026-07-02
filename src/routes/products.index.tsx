@@ -5,10 +5,10 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
-import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
-import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
-import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
-import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
+import fttplGpsDevice from "@/assets/gps-device.png";
+import fuelSensorImage from "@/assets/fuel-sensor.png";
+import fleetCameraImage from "@/assets/fleet-camera.png";
+import v5BasicGpsImage from "@/assets/v5-basic-gps.png";
 
 export const Route = createFileRoute("/products/")({
   head: () => ({
@@ -42,7 +42,7 @@ const products = [
   {
     slug: "vltd-4g-device",
     icon: Cpu,
-    image: fttplGpsDevice.url,
+    image: fttplGpsDevice,
     name: "VLTD 4G Device",
     tag: "FT-VLTD-4G",
     desc: "AIS-140 certified 4G vehicle tracker with SOS, driver behaviour monitoring and live fleet visibility.",
@@ -51,7 +51,7 @@ const products = [
   {
     slug: "vltd-2g-device",
     icon: Monitor,
-    image: fleetCameraImage.url,
+    image: fleetCameraImage,
     name: "VLTD 2G Device",
     tag: "FT-VLTD-2G",
     desc: "Reliable, budget-friendly AIS-140 ready tracker for essential real-time tracking, geofencing and trip history.",
@@ -60,7 +60,7 @@ const products = [
   {
     slug: "v5-basic-gps-device",
     icon: Cpu,
-    image: v5BasicGpsImage.url,
+    image: v5BasicGpsImage,
     name: "V5 Basic GPS Device",
     tag: "FT-V5-Basic",
     desc: "Compact, easy-to-install GPS tracker for everyday vehicle security — perfect for cars, bikes and personal vehicles.",
@@ -69,7 +69,7 @@ const products = [
   {
     slug: "capacitive-fuel-sensor",
     icon: Droplet,
-    image: fuelSensorImage.url,
+    image: fuelSensorImage,
     name: "Capacitive Fuel Sensor",
     tag: "FT-CFS-1000",
     desc: "Premium capacitive fuel level sensor with ±1–2% accuracy, 1 mm resolution and tamper-proof aluminium casing.",
