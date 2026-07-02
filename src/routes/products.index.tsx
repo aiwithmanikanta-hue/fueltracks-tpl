@@ -5,10 +5,10 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildProductEnquiryUrl } from "@/lib/whatsapp";
-import fttplGpsDevice from "@/assets/gps-device.png.asset.json";
-import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
-import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
-import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
+import fttplGpsDevice from "@/assets/gps-device.png";
+import fuelSensorImage from "@/assets/fuel-sensor.png";
+import fleetCameraImage from "@/assets/fleet-camera.png";
+import v5BasicGpsImage from "@/assets/v5-basic-gps.png";
 
 export const Route = createFileRoute("/products/")({
   head: () => ({

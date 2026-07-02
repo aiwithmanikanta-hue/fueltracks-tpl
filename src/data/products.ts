@@ -5,10 +5,10 @@ import {
   Route, Users, Map, Zap, Car, Bike, Building2, Siren,
   type LucideIcon,
 } from "lucide-react";
-import fuelSensorImage from "@/assets/fuel-sensor.png.asset.json";
-import gpsDeviceImage from "@/assets/gps-device.png.asset.json";
-import fleetCameraImage from "@/assets/fleet-camera.png.asset.json";
-import v5BasicGpsImage from "@/assets/v5-basic-gps.png.asset.json";
+import fuelSensorImage from "@/assets/fuel-sensor.png";
+import gpsDeviceImage from "@/assets/gps-device.png";
+import fleetCameraImage from "@/assets/fleet-camera.png";
+import v5BasicGpsImage from "@/assets/v5-basic-gps.png";
 
 export type Feature = { icon: LucideIcon; title: string; desc: string };
 export type Step = { title: string; desc: string };
